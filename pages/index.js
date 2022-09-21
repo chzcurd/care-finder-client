@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { makeGET, proxyReq } from '../helpers/httpHelpers'
+import { makeGET, proxyGET, proxyReq } from '../helpers/httpHelpers'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -11,12 +11,11 @@ export default function Home() {
   useEffect(() => {
 
     async function fetchData() {
-    let token = await proxyReq("https://www.knautzfamilywi.com/CareFinder-1.0.0/api/key/get");
+    let token = await proxyGET("https://www.knautzfamilywi.com/CareFinder-1.0.0/api/key/get");
     token = token.xml.key;
-    console.log(token);
     setToken(token);
     }
-    fetchData()
+      fetchData()
   }, [])
 
   return (
@@ -33,7 +32,8 @@ export default function Home() {
         </h1>
 
         <p>Very cool 👍</p>
-        <p>{token}</p>
+
+        <p>Token:<br /> {token}</p>
 
       </main>
     </div>

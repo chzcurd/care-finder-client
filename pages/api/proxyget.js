@@ -6,7 +6,6 @@ import {makeGET} from "../../helpers/httpHelpers"
 export default async function handler(req, res) {
 
    const output = await makeGET(req.query.url)
-    //console.log( output)
     res.status(200).json(output)
 
 

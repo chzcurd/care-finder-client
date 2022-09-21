@@ -6,7 +6,6 @@ import {XMLParser, XMLBuilder, XMLValidator} from 'fast-xml-parser'
  * Retrieves XML or JSON data from a url
 */
 export async function makeGET(url) {
-    console.log(url)
     const res = await fetch(url, {mode: 'cors' })
 
 
@@ -80,7 +79,10 @@ export async function makeGET(url) {
         }
 
 
-export async function proxyReq(url) {
-    console.log('http://localhost:3000/api/hello?url=' + url)
-    return await makeGET( 'http://localhost:3000/api/hello?url=' + url)
+export async function proxyGET(url) {
+    return await makeGET( 'http://localhost:3000/api/proxyget?url=' + url)
+}
+
+export async function proxyPOST(url, body) {
+    return await makeGET( 'http://localhost:3000/api/proxypost?url=' + url + "&body=" + body)
 }
