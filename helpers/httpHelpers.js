@@ -8,7 +8,7 @@ import {XMLParser, XMLBuilder, XMLValidator} from 'fast-xml-parser'
 export async function makeGET(url) {
     const res = await fetch(url, {mode: 'cors' })
 
-
+    console.log(res)
 
     try {
 
@@ -21,7 +21,9 @@ export async function makeGET(url) {
     }
 
     if (contentType === 'application/xml') {
-        return new XMLParser().parse(await res.text());
+        return res.text().then(text => {
+            return new XMLParser().parse(text)
+        })
 
     }
     else if (contentType === 'application/json'){
@@ -62,7 +64,9 @@ export async function makeGET(url) {
         const contentType = res.headers.get("content-type").split(';')[0]
     
         if (contentType === 'application/xml') {
-            return new XMLParser().parse(await res.text());
+            return res.text().then(text => {
+                return new XMLParser().parse(text)
+            })
     
         }
         else if (contentType === 'application/json'){

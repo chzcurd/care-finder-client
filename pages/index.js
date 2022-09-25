@@ -11,7 +11,8 @@ export default function Home() {
   useEffect(() => {
 
     async function fetchData() {
-    let token = await proxyGET("https://www.knautzfamilywi.com/CareFinder-1.0.0/api/key/get");
+    let token = await makeGET("http://localhost:3000/api/key/get");
+    console.log(token)
     token = token.xml.key;
     setToken(token);
     }
