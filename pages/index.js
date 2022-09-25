@@ -2,11 +2,14 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { makeGET, proxyGET, proxyReq } from '../helpers/httpHelpers'
-import styles from '../styles/Home.module.css'
+//import styles from '../styles/Home.module.css'
+import styles from '../styles/home.module.scss'
 
 export default function Home() {
 
   const [token, setToken] = useState(null)
+
+  const [WIHospital, setWIHospital] = useState(null)
 
   useEffect(() => {
 
@@ -16,8 +19,23 @@ export default function Home() {
     token = token.xml.key;
     setToken(token);
     }
-      fetchData()
+    fetchData()
+
   }, [])
+
+  useEffect(() => {
+
+    if (token != null){
+      async function fetchData() {
+        let resp = await makeGET("/api/hospitals/state/wi", token);
+        console.log(resp)
+        setWIHospital(resp)
+        }
+        fetchData()
+    }
+    
+
+  }, [token])
 
   return (
     <div className={styles.container}>
@@ -34,7 +52,9 @@ export default function Home() {
 
         <p>Very cool 👍</p>
 
-        <p>Token:<br /> {token}</p>
+        <p className={`${styles.tac}`}>Token:<br />{token}</p>
+
+        <p>/api/hospitals/state/wi:<br />{WIHospital}</p>
 
       </main>
     </div>

@@ -15,11 +15,11 @@ export function getUrlOrigin() {
 /*
  * Retrieves XML or JSON data from a url
 */
-export async function makeGET(url) {
+export async function makeGET(url, apiKey) {
 
     const urlOrigin = getUrlOrigin()
 
-    const res = await fetch(urlOrigin + url, {mode: 'cors' })
+    const res = await fetch(urlOrigin + url, {mode: 'cors', headers: {'X-API-KEY': apiKey} })
 
     console.log(res)
 
