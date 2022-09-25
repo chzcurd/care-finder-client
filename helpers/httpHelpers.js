@@ -1,12 +1,27 @@
 
 import {XMLParser, XMLBuilder, XMLValidator} from 'fast-xml-parser'
+import absoluteUrl from 'next-absolute-url'
+
+export function getUrlOrigin() {
+    if (typeof window !== 'undefined') {
+        const {origin} = absoluteUrl()
+        return origin
+      }
+      else {
+        console.error("window undefined! could not get hostname")
+        return null
+      }
+}
 
 // "https://www.knautzfamilywi.com/CareFinder-1.0.0/api/key/get"
 /*
  * Retrieves XML or JSON data from a url
 */
 export async function makeGET(url) {
-    const res = await fetch(url, {mode: 'cors' })
+
+    const urlOrigin = getUrlOrigin()
+
+    const res = await fetch(urlOrigin + url, {mode: 'cors' })
 
     console.log(res)
 
@@ -51,7 +66,9 @@ export async function makeGET(url) {
             mode: 'cors'
         }
 
-        const res = await fetch(url, options )
+        const urlOrigin = getUrlOrigin()
+
+        const res = await fetch(urlOrigin + url, options )
 
         if (!res.ok) {
             console.err("Response not ok: ", res)
@@ -81,11 +98,6 @@ export async function makeGET(url) {
             return null
         }
         }
-
-
-export async function proxyGET(url) {
-    return await makeGET( 'http://localhost:3000/api/proxyget?url=' + url)
-}
 
 export async function proxyPOST(url, body) {
     return await makeGET( 'http://localhost:3000/api/proxypost?url=' + url + "&body=" + body)

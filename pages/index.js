@@ -11,7 +11,7 @@ export default function Home() {
   useEffect(() => {
 
     async function fetchData() {
-    let token = await makeGET("http://localhost:3000/api/key/get");
+    let token = await makeGET("/api/key/get");
     console.log(token)
     token = token.xml.key;
     setToken(token);
