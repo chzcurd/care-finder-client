@@ -1,11 +1,9 @@
 
 import {XMLParser, XMLBuilder, XMLValidator} from 'fast-xml-parser'
-import absoluteUrl from 'next-absolute-url'
 
 export function getUrlOrigin() {
     if (typeof window !== 'undefined') {
-        const {origin} = absoluteUrl()
-        return origin
+        return window.location.origin
       }
       else {
         console.error("window undefined! could not get hostname")

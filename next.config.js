@@ -6,7 +6,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://www.knautzfamilywi.com/CareFinder-1.0.0/api/:path*',
+        destination: 'https://www.knautzfamilywi.com/CareFinder-1.0.0/api/:path*',
       }
     ]
   }
