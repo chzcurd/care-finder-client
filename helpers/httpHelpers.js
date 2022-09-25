@@ -7,7 +7,7 @@ export function getUrlOrigin() {
       }
       else {
         console.error("window undefined! could not get hostname")
-        return null
+        return ""
       }
 }
 
@@ -29,7 +29,7 @@ export async function makeGET(url) {
     const contentType = res.headers.get("content-type").split(';')[0]
 
     if (!res.ok) {
-        console.err("Response not ok: ", res)
+        console.error("Response not ok: ", res)
         return null
     }
 
@@ -66,10 +66,14 @@ export async function makeGET(url) {
 
         const urlOrigin = getUrlOrigin()
 
+        console.log(urlOrigin + url)
+
         const res = await fetch(urlOrigin + url, options )
 
+        console.log(res)
+
         if (!res.ok) {
-            console.err("Response not ok: ", res)
+            console.error("Response not ok: ", res)
             return null
         }
     
