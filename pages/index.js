@@ -5,8 +5,7 @@ import { makeGET, proxyGET, proxyReq } from "../helpers/httpHelpers";
 import { getAllHospitals, getKey } from "../helpers/apiClient";
 import ShowHospital from "../components/hospitalDisplays/ShowHospital";
 import styles from "../styles/home.module.scss";
-
-import { TailSpin } from "react-loader-spinner";
+import { CircularProgress } from "@mui/material";
 
 export default function Home() {
   const [token, setToken] = useState(null);
@@ -45,18 +44,7 @@ export default function Home() {
 
         <p>Very cool 👍</p>
 
-        {(!token || !hospitals) && (
-          <TailSpin
-            height="80"
-            width="80"
-            color="#4fa94d"
-            ariaLabel="tail-spin-loading"
-            radius="1"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-          />
-        )}
+        {(!token || !hospitals) && <CircularProgress />}
 
         <p className={`${styles.tac}`}>
           apiKey:
