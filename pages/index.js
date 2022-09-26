@@ -6,6 +6,8 @@ import { getAllHospitals, getKey } from "../helpers/apiClient";
 import ShowHospital from "../components/hospitalDisplays/ShowHospital";
 import styles from "../styles/home.module.scss";
 
+import { TailSpin } from "react-loader-spinner";
+
 export default function Home() {
   const [token, setToken] = useState(null);
   const [hospitals, setHospitals] = useState(null);
@@ -42,6 +44,19 @@ export default function Home() {
         <h1 className={styles.title}>Welcome to Care Finder</h1>
 
         <p>Very cool 👍</p>
+
+        {(!token || !hospitals) && (
+          <TailSpin
+            height="80"
+            width="80"
+            color="#4fa94d"
+            ariaLabel="tail-spin-loading"
+            radius="1"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        )}
 
         <p className={`${styles.tac}`}>
           apiKey:
