@@ -20,3 +20,66 @@ export async function getAllHospitals(key) {
     return itemArray;
   }
 }
+
+export async function getHospitalById(id, key) {
+  let resp = await makeGET("/api/hospitals/id/" + id, key);
+  if (resp == null) {
+    return null;
+  } else {
+    const itemArray = resp.xml.item;
+    return itemArray;
+  }
+}
+
+export async function getHospitalByCity(city, key) {
+  let resp = await makeGET("/api/hospitals/city/" + city, key);
+  if (resp == null) {
+    return null;
+  } else {
+    const itemArray = resp.xml.item;
+    return itemArray;
+  }
+}
+
+export async function getHospitalByState(state, key) {
+  let resp = await makeGET("/api/hospitals/state/" + state, key);
+  if (resp == null) {
+    return null;
+  } else {
+    const itemArray = resp.xml.item;
+    return itemArray;
+  }
+}
+
+export async function getHospitalByCounty(county, key) {
+  let resp = await makeGET("/api/hospitals/county/" + county, key);
+  if (resp == null) {
+    return null;
+  } else {
+    const itemArray = resp.xml.item;
+    return itemArray;
+  }
+}
+
+export async function getHospitalByCityState(city, state, key) {
+  let resp = await makeGET(
+    "/api/hospitals/citystate/" + city + "/" + state,
+    key
+  );
+  if (resp == null) {
+    return null;
+  } else {
+    const itemArray = resp.xml.item;
+    return itemArray;
+  }
+}
+
+export async function getHospitalByName(name, key) {
+  let resp = await makeGET("/api/hospitals/name/" + name, key);
+  if (resp == null) {
+    return null;
+  } else {
+    const itemArray = resp.xml.item;
+    return itemArray;
+  }
+}
