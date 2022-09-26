@@ -17,9 +17,12 @@ export function getUrlOrigin() {
 */
 export async function makeGET(url, apiKey) {
 
-    const urlOrigin = getUrlOrigin()
+    if (url.startsWith("/")) {
+        url = getUrlOrigin() + url
+    }
+    //const urlOrigin = getUrlOrigin()
 
-    const res = await fetch(urlOrigin + url, {mode: 'cors', headers: {'X-API-KEY': apiKey} })
+    const res = await fetch( url, {mode: 'cors', headers: {'X-API-KEY': apiKey} })
 
     console.log(res)
 
