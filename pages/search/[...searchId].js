@@ -2,10 +2,50 @@ import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { makeGET, proxyGET, proxyReq } from "../../helpers/httpHelpers";
-import { getAllHospitals, getKey } from "../../helpers/apiClient";
+import {
+  getAllHospitals,
+  getHospitalsByRoute,
+  getKey,
+} from "../../helpers/apiClient";
 import ShowHospital from "../../components/hospitalDisplays/ShowHospital";
 import styles from "../../styles/home.module.scss";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, TextField, withTheme } from "@mui/material";
+import { outlinedInputClasses } from "@mui/material/OutlinedInput";
+import { inputLabelClasses } from "@mui/material/InputLabel";
+import { styled } from "@mui/material/styles";
+
+const StyledTextField = styled(TextField)({
+  [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
+    borderColor: "lightBlue",
+  },
+  [`&:hover .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]:
+    {
+      borderColor: "lightBlue",
+    },
+  [`& .${outlinedInputClasses.root}.${outlinedInputClasses.focused} .${outlinedInputClasses.notchedOutline}`]:
+    {
+      borderColor: "lightBlue",
+    },
+  [`& .${outlinedInputClasses.input}`]: {
+    color: "white",
+  },
+  [`&:hover .${outlinedInputClasses.input}`]: {
+    color: "white",
+  },
+  [`& .${outlinedInputClasses.root}.${outlinedInputClasses.focused} .${outlinedInputClasses.input}`]:
+    {
+      color: "lightBlue",
+    },
+  [`& .${inputLabelClasses.outlined}`]: {
+    color: "white",
+  },
+  [`&:hover .${inputLabelClasses.outlined}`]: {
+    color: "white",
+  },
+  [`& .${inputLabelClasses.outlined}.${inputLabelClasses.focused}`]: {
+    color: "lightBlue",
+  },
+});
 
 const routeLengthMap = {
   id: 2,
@@ -19,6 +59,10 @@ const routeLengthMap = {
 export default function Home(props) {
   const [token, setToken] = useState(null);
   const [hospitals, setHospitals] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [search, setSearch] = useState(null);
+
+  //Search Type
   const searchType = props.searchId[0];
 
   useEffect(() => {
@@ -32,14 +76,14 @@ export default function Home(props) {
   useEffect(() => {
     async function fetchData() {
       if (token != null) {
-        const hospitals = await getAllHospitals(token);
+        const hospitals = await getHospitalsByRoute(searchType, search, token);
         if (hospitals != null) {
           setHospitals(hospitals);
         }
       }
     }
     fetchData();
-  }, [token]);
+  }, [search]);
 
   return (
     <div className={styles.container}>
@@ -52,22 +96,36 @@ export default function Home(props) {
       <main className={styles.main}>
         <h1 className={styles.title}>Welcome to Care Finder</h1>
 
-        <p>{props.searchId.length}</p>
+        {!token && <CircularProgress />}
+        {token && (
+          <div>
+            <h2>Search by: {searchType}</h2>
+            {/* search boxes */}
+            <div /*style={{ background: "white" }}*/>
+              {searchType === "citystate" && (
+                <StyledTextField
+                  id="city"
+                  defaultValue="My Default Value"
+                  variant="outlined"
+                  label="City"
+                />
+              )}
+              <StyledTextField
+                id="state"
+                defaultValue="My Default Value"
+                variant="outlined"
+                label={searchType.charAt(0).toUpperCase() + searchType.slice(1)}
+              />
+            </div>
 
-        {(!token || !hospitals) && <CircularProgress />}
-
-        <p className={`${styles.tac}`}>
-          apiKey:
-          <br />
-          {token}
-        </p>
-
-        {hospitals && (
-          <div className={styles.tac}>
-            <h1>Hospitals: </h1>
-            {hospitals.map((hospital) => (
-              <ShowHospital hospital={hospital} />
-            ))}
+            {hospitals && (
+              <div className={styles.tac}>
+                <h1>Hospitals: </h1>
+                {hospitals.map((hospital) => (
+                  <ShowHospital hospital={hospital} />
+                ))}
+              </div>
+            )}
           </div>
         )}
       </main>
@@ -87,7 +145,7 @@ export async function getServerSideProps(context) {
 
   const validLength = routeLengthMap[searchType];
 
-  if (searchType != undefined && searchId.length === validLength) {
+  if (searchType != undefined) {
     return {
       props: {
         searchId: searchId,
