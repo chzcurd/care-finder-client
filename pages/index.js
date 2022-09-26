@@ -29,7 +29,13 @@ export default function Home() {
         if (resp == null) {
           setWIHospital("Error fetching data!");
         } else {
-          setWIHospital(resp);
+          const itemArray = resp.xml.item;
+          let hospitalNames = [];
+          itemArray.forEach((item) => {
+            console.log(item);
+            hospitalNames.push(item.hospital_name);
+          });
+          setWIHospital(hospitalNames);
         }
       }
       fetchData();
@@ -50,15 +56,15 @@ export default function Home() {
         <p>Very cool 👍</p>
 
         <p className={`${styles.tac}`}>
-          Token:
+          apiKey:
           <br />
           {token}
         </p>
 
         <p className={`${styles.tac}`}>
-          /api/hospitals/state/wi:
+          Hospital Names:
           <br />
-          {WIHospital}
+          {WIHospital?.toString()}
         </p>
       </main>
     </div>
