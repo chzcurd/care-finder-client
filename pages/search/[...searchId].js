@@ -60,10 +60,77 @@ export default function Home(props) {
   const [token, setToken] = useState(null);
   const [hospitals, setHospitals] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  //input from text field 1
+  const [search1, setSearch1] = useState(null);
+  //input from text field 2
+  const [search2, setSearch2] = useState(null);
+  //input to pass into api
   const [search, setSearch] = useState(null);
 
   //Search Type
   const searchType = props.searchId[0];
+
+  //Search code
+  useEffect(() => {
+    switch (searchType) {
+      //no path
+      case null:
+        console.log("no route");
+        setSearch("notneeded");
+        break;
+
+      //id
+      case "id":
+        console.log("id");
+        if (search1 != null && search1.length > 0) {
+          setSearch(search1);
+        }
+        break;
+
+      //city
+      case "city":
+        console.log("city");
+        if (search1 != null && search1.length > 0) {
+          setSearch(search1);
+        }
+        break;
+
+      //state
+      case "state":
+        console.log("state");
+        if (search1 != null && search1.length === 2) {
+          setSearch(search1);
+        }
+        break;
+
+      //county
+      case "county":
+        if (search1 != null && search1.length > 0) {
+          setSearch(search1);
+        }
+        break;
+
+      //citystate
+      case "citystate":
+        if (
+          search1 != null &&
+          search2 != null &&
+          search1.length === 2 &&
+          search2.length > 0
+        ) {
+          setSearch(search1 + "/" + search2);
+        }
+        break;
+
+      //name
+      case "name":
+        console.log("name");
+        if (search1 != null && search1.length > 0) {
+          setSearch(search1);
+        }
+        break;
+    }
+  }, [search1, search2]);
 
   useEffect(() => {
     async function fetchData() {
@@ -75,6 +142,8 @@ export default function Home(props) {
 
   useEffect(() => {
     async function fetchData() {
+      console.log(search);
+      console.log(searchType);
       if (token != null) {
         const hospitals = await getHospitalsByRoute(searchType, search, token);
         if (hospitals != null) {
@@ -108,12 +177,18 @@ export default function Home(props) {
                   defaultValue="My Default Value"
                   variant="outlined"
                   label="City"
+                  onChange={(event) => {
+                    setSearch2(event.target.value);
+                  }}
                 />
               )}
               <StyledTextField
                 id="state"
                 defaultValue="My Default Value"
                 variant="outlined"
+                onChange={(event) => {
+                  setSearch1(event.target.value);
+                }}
                 label={searchType.charAt(0).toUpperCase() + searchType.slice(1)}
               />
             </div>
