@@ -70,6 +70,11 @@ export default function Home(props) {
   //Search Type
   const searchType = props.searchId[0];
 
+  const search1Label =
+    searchType === "citystate"
+      ? "State"
+      : searchType.charAt(0).toUpperCase() + searchType.slice(1);
+
   //Search code
   useEffect(() => {
     switch (searchType) {
@@ -189,7 +194,7 @@ export default function Home(props) {
                 onChange={(event) => {
                   setSearch1(event.target.value);
                 }}
-                label={searchType.charAt(0).toUpperCase() + searchType.slice(1)}
+                label={search1Label}
               />
             </div>
 
