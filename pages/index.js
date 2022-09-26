@@ -15,6 +15,8 @@ export default function Home() {
       let token = await makeGET("/api/key/get");
       console.log(token);
       token = token.xml.key;
+      let create = await makeGET("/api/key/create/" + token + "/5/5");
+      console.log(create);
       setToken(token);
     }
     fetchData();
@@ -23,7 +25,7 @@ export default function Home() {
   useEffect(() => {
     if (token != null) {
       async function fetchData() {
-        let resp = await makeGET("/api/hospitals/state/wi", token);
+        let resp = await makeGET("/api/hospitals", token);
         if (resp == null) {
           setWIHospital("Error fetching data!");
         } else {
