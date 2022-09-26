@@ -8,7 +8,7 @@ import styles from "../styles/home.module.scss";
 export default function Home() {
   const [token, setToken] = useState(null);
 
-  const [WIHospital, setWIHospital] = useState(null);
+  const [hospitals, setHospitals] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -27,14 +27,10 @@ export default function Home() {
       async function fetchData() {
         let resp = await makeGET("/api/hospitals", token);
         if (resp == null) {
-          setWIHospital("Error fetching data!");
+          setHospitals("Error fetching data!");
         } else {
           const itemArray = resp.xml.item;
-          let hospitalNames = [];
-          itemArray.forEach((item) => {
-            console.log(item);
-          });
-          setWIHospital(itemArray);
+          setHospitals(itemArray);
         }
       }
       fetchData();
@@ -60,10 +56,10 @@ export default function Home() {
           {token}
         </p>
 
-        {WIHospital && (
+        {hospitals && (
           <div className={styles.tac}>
             <h1>Hospitals: </h1>
-            {WIHospital.map((hospital) => {
+            {hospitals.map((hospital) => {
               return (
                 <div>
                   <h2>{hospital.hospital_name}:</h2>
