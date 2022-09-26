@@ -1,22 +1,24 @@
 # Care Finder Client
 
-Made by Josh Osmanski
+Created by Josh Osmanski
 
 ## How to install
 
-1. Have node.js installed
-2. Run 'npm install'
+First, have node.js installed on the system, then:
+
+```bash
+npm install
+```
 
 ## Getting Started
 
-First, run the development server:
+Run the development server using:
 
 ```bash
 npm run dev
+```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-```
 
 ## Routes
 
@@ -27,6 +29,8 @@ Key
 
 Get Hospitals
 
+'x-api-key' header needed for these requests
+
 - /api/hospitals Get all hospitals
 - /api/hospitals/id/var Get a hospital based on its unique identifier
 - /api/hospitals/city/var Get a hospital based on city name
@@ -34,3 +38,7 @@ Get Hospitals
 - /api/hospitals/county/var Get a hospital based on county name
 - /api/hospitals/citystate/var/var Get a hospital based on city/state name combination
 - /api/hospitals/name/var Get a hospital based on the hospital's name
+
+```
+
+```
