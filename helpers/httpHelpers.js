@@ -15,7 +15,8 @@ export function getUrlOrigin() {
  */
 export async function makeGET(url, apiKey) {
   if (url.startsWith("/")) {
-    url = getUrlOrigin() + url;
+    //url = getUrlOrigin() + url;
+    url = "https://www.knautzfamilywi.com/CareFinder-1.0.0" + url;
   }
   //const urlOrigin = getUrlOrigin()
 
@@ -63,7 +64,8 @@ export async function makePOST(url, body, key) {
   };
 
   if (url.startsWith("/")) {
-    url = getUrlOrigin() + url;
+    //url = getUrlOrigin() + url;
+    url = "https://www.knautzfamilywi.com/CareFinder-1.0.0" + url;
   }
 
   const res = await fetch(url, options);
