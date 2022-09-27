@@ -1,5 +1,7 @@
 import { XMLParser, XMLBuilder, XMLValidator } from "fast-xml-parser";
 
+const BASE_API_URL = "https://www.knautzfamilywi.com/CareFinder-1.0.0";
+
 export function getUrlOrigin() {
   if (typeof window !== "undefined") {
     return window.location.origin;
@@ -16,7 +18,7 @@ export function getUrlOrigin() {
 export async function makeGET(url, apiKey) {
   if (url.startsWith("/")) {
     //url = getUrlOrigin() + url;
-    url = "https://www.knautzfamilywi.com/CareFinder-1.0.0" + url;
+    url = BASE_API_URL + url;
   }
   //const urlOrigin = getUrlOrigin()
 
@@ -65,7 +67,7 @@ export async function makePOST(url, body, key) {
 
   if (url.startsWith("/")) {
     //url = getUrlOrigin() + url;
-    url = "https://www.knautzfamilywi.com/CareFinder-1.0.0" + url;
+    url = BASE_API_URL + url;
   }
 
   const res = await fetch(url, options);
