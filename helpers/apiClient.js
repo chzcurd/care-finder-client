@@ -63,7 +63,7 @@ export async function getHospitalByCounty(county, key) {
 
 export async function getHospitalByCityState(city, state, key) {
   let resp = await makeGET(
-    "/api/hospitals/citystate/" + city + "/" + state,
+    "/api/hospitals/citystate/" + state + "/" + city,
     key
   );
   if (resp == null) {

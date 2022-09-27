@@ -162,7 +162,7 @@ export default function Home(props) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Care Finder</title>
+        <title>{`Care Finder | Search by ${searchType}`}</title>
         <meta name="description" content="Care Finder client" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
