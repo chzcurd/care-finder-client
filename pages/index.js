@@ -9,30 +9,7 @@ import { CircularProgress } from "@mui/material";
 import SearchLinks from "../components/links/Links";
 import Link from "next/link";
 
-export default function Home() {
-  const [token, setToken] = useState(null);
-  const [hospitals, setHospitals] = useState(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      const key = await getKey();
-      setToken(key);
-    }
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    async function fetchData() {
-      if (token != null) {
-        const hospitals = await getAllHospitals(token);
-        if (hospitals != null) {
-          setHospitals(hospitals);
-        }
-      }
-    }
-    fetchData();
-  }, [token]);
-
+export default function Home(props) {
   return (
     <div className={styles.container}>
       <Head>
@@ -48,10 +25,25 @@ export default function Home() {
           </Link>
         </h1>
 
-        <p>Very cool 👍</p>
+        {props.hospitalsLength && (
+          <p>Over {props.hospitalsLength} hospitals stored!</p>
+        )}
 
         <SearchLinks />
       </main>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const key = await getKey();
+  const hospitals = await getAllHospitals(key);
+
+  return {
+    props: {
+      hospitalsLength: hospitals.length,
+    },
+  };
+
+  // Rest of `getServerSideProps` code
 }
