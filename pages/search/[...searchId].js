@@ -188,14 +188,14 @@ export default function Home(props) {
 
         {(!token || isLoading) && <CircularProgress />}
         {token && (
-          <div>
+          <div className={`${styles.aic} ${styles.tac}`}>
             <h2>Search by: {searchType}</h2>
             {/* search boxes */}
             <div /*style={{ background: "white" }}*/>
               {searchType === "citystate" && (
                 <StyledTextField
                   id="city"
-                  defaultValue="My Default Value"
+                  defaultValue=""
                   variant="outlined"
                   label="City"
                   onChange={(event) => {
@@ -206,7 +206,7 @@ export default function Home(props) {
               {searchType !== "all" && (
                 <StyledTextField
                   id="state"
-                  defaultValue="My Default Value"
+                  defaultValue=""
                   variant="outlined"
                   onChange={(event) => {
                     setSearch1(event.target.value);
@@ -218,7 +218,7 @@ export default function Home(props) {
 
             {hospitals && (
               <div className={styles.tac}>
-                <h1>Hospitals: </h1>
+                <h1>{hospitals.length} hospitals found: </h1>
                 {hospitals.map((hospital) => (
                   <ShowHospital hospital={hospital} />
                 ))}
