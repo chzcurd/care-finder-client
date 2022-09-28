@@ -13,6 +13,7 @@ import { CircularProgress, TextField, withTheme } from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { styled } from "@mui/material/styles";
+import SearchLinks from "../../components/links/Links";
 
 const StyledTextField = styled(TextField)({
   [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
@@ -48,6 +49,7 @@ const StyledTextField = styled(TextField)({
 });
 
 const routeLengthMap = {
+  all: 0,
   id: 2,
   city: 2,
   state: 2,
@@ -79,9 +81,9 @@ export default function Home(props) {
   useEffect(() => {
     switch (searchType) {
       //no path
-      case null:
-        console.log("no route");
-        setSearch("notneeded");
+      case "all":
+        console.log("all");
+        setSearch("all");
         break;
 
       //id
@@ -141,6 +143,10 @@ export default function Home(props) {
     async function fetchData() {
       const key = await getKey();
       setToken(key);
+
+      /*(if (searchType === "all") {
+        setSearch1("all");
+      }*/
     }
     fetchData();
   }, []);
@@ -149,15 +155,19 @@ export default function Home(props) {
     async function fetchData() {
       console.log(search);
       console.log(searchType);
+      console.log(token);
       if (token != null) {
+        setIsLoading(true);
         const hospitals = await getHospitalsByRoute(searchType, search, token);
+        console.log(hospitals);
         if (hospitals != null) {
           setHospitals(hospitals);
         }
+        setIsLoading(false);
       }
     }
     fetchData();
-  }, [search]);
+  }, [search, token]);
 
   return (
     <div className={styles.container}>
@@ -169,8 +179,9 @@ export default function Home(props) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Welcome to Care Finder</h1>
+        <SearchLinks />
 
-        {!token && <CircularProgress />}
+        {(!token || isLoading) && <CircularProgress />}
         {token && (
           <div>
             <h2>Search by: {searchType}</h2>
@@ -187,15 +198,17 @@ export default function Home(props) {
                   }}
                 />
               )}
-              <StyledTextField
-                id="state"
-                defaultValue="My Default Value"
-                variant="outlined"
-                onChange={(event) => {
-                  setSearch1(event.target.value);
-                }}
-                label={search1Label}
-              />
+              {searchType !== "all" && (
+                <StyledTextField
+                  id="state"
+                  defaultValue="My Default Value"
+                  variant="outlined"
+                  onChange={(event) => {
+                    setSearch1(event.target.value);
+                  }}
+                  label={search1Label}
+                />
+              )}
             </div>
 
             {hospitals && (
@@ -225,7 +238,7 @@ export async function getServerSideProps(context) {
 
   const validLength = routeLengthMap[searchType];
 
-  if (searchType != undefined) {
+  if (searchType != undefined && validLength != undefined) {
     return {
       props: {
         searchId: searchId,

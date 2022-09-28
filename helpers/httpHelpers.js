@@ -3,12 +3,13 @@ import { XMLParser, XMLBuilder, XMLValidator } from "fast-xml-parser";
 const BASE_API_URL = "https://www.knautzfamilywi.com/CareFinder-1.0.0";
 
 export function getUrlOrigin() {
-  if (typeof window !== "undefined") {
+  return BASE_API_URL;
+  /*if (typeof window !== "undefined") {
     return window.location.origin;
   } else {
     console.error("window undefined! could not get hostname");
     return "";
-  }
+  }*/
 }
 
 // "https://www.knautzfamilywi.com/CareFinder-1.0.0/api/key/get"
@@ -17,8 +18,7 @@ export function getUrlOrigin() {
  */
 export async function makeGET(url, apiKey) {
   if (url.startsWith("/")) {
-    //url = getUrlOrigin() + url;
-    url = BASE_API_URL + url;
+    url = getUrlOrigin() + url;
   }
   //const urlOrigin = getUrlOrigin()
 
@@ -66,8 +66,7 @@ export async function makePOST(url, body, key) {
   };
 
   if (url.startsWith("/")) {
-    //url = getUrlOrigin() + url;
-    url = BASE_API_URL + url;
+    url = getUrlOrigin() + url;
   }
 
   const res = await fetch(url, options);

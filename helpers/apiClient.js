@@ -87,8 +87,8 @@ export async function getHospitalByName(name, key) {
 export async function getHospitalsByRoute(route, search, key) {
   switch (route) {
     //no path
-    case null:
-      console.log("no route");
+    case "all":
+      console.log("all");
       return await getAllHospitals(key);
 
     //id

@@ -6,6 +6,7 @@ import { getAllHospitals, getKey } from "../helpers/apiClient";
 import ShowHospital from "../components/hospitalDisplays/ShowHospital";
 import styles from "../styles/home.module.scss";
 import { CircularProgress } from "@mui/material";
+import SearchLinks from "../components/links/Links";
 
 export default function Home() {
   const [token, setToken] = useState(null);
@@ -44,22 +45,7 @@ export default function Home() {
 
         <p>Very cool 👍</p>
 
-        {(!token || !hospitals) && <CircularProgress />}
-
-        <p className={`${styles.tac}`}>
-          apiKey:
-          <br />
-          {token}
-        </p>
-
-        {hospitals && (
-          <div className={styles.tac}>
-            <h1>Hospitals: </h1>
-            {hospitals.map((hospital) => (
-              <ShowHospital hospital={hospital} />
-            ))}
-          </div>
-        )}
+        <SearchLinks />
       </main>
     </div>
   );
