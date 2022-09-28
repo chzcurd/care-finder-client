@@ -14,6 +14,7 @@ import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { styled } from "@mui/material/styles";
 import SearchLinks from "../../components/links/Links";
+import Link from "next/link";
 
 const StyledTextField = styled(TextField)({
   [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
@@ -178,7 +179,11 @@ export default function Home(props) {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to Care Finder</h1>
+        <h1 className={styles.title}>
+          <Link href={"/"} as={`/`}>
+            Welcome to Care Finder
+          </Link>
+        </h1>
         <SearchLinks />
 
         {(!token || isLoading) && <CircularProgress />}
