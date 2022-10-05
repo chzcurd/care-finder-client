@@ -65,7 +65,6 @@ export default function Home(props) {
   const [token, setToken] = useState(null);
   const [hospitals, setHospitals] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [progress, setProgress] = useState(0);
   //input from text field 1
   const [search1, setSearch1] = useState(null);
   //input from text field 2
@@ -247,19 +246,31 @@ export default function Home(props) {
               </Grid>
               <p>Has ER</p>
             </Grid>
-            {hasER.toString()}
 
             {isLoading && <LinearProgress />}
             {hospitals && (
               <div className={styles.tac}>
                 <h1>{hospitals.length} hospitals found: </h1>
                 <br />
-                {hospitals.map((hospital, index) => (
-                  <ShowHospital
-                    hospital={hospital}
-                    key={`showHospital-${index}`}
-                  />
-                ))}
+                {hospitals.map((hospital, index) => {
+                  if (hasER) {
+                    return (
+                      hospital.emergency_services && (
+                        <ShowHospital
+                          hospital={hospital}
+                          key={`showHospital-${index}`}
+                        />
+                      )
+                    );
+                  } else {
+                    return (
+                      <ShowHospital
+                        hospital={hospital}
+                        key={`showHospital-${index}`}
+                      />
+                    );
+                  }
+                })}
               </div>
             )}
           </div>
