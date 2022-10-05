@@ -4,6 +4,9 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Link from "next/link";
+import styles from "../../styles/home.module.scss";
+
 
 export default function ShowHospital(props) { 
     const hospital = props.hospital
@@ -22,20 +25,19 @@ export default function ShowHospital(props) {
           <>
           <h1>{hospital.hospital_name}</h1>
           <Typography>
-          provider_id: {hospital.provider_id}<br />
-          hospital_name: {hospital.hospital_name}<br />
-          address: {hospital.address}<br />
-          city: {hospital.city}<br />
-          state: {hospital.state}<br />
-          zip_code: {hospital.zip_code}<br />
-          county_name: {hospital.county_name}<br />
-          phone_number: {hospital.phone_number}<br />
-          hospital_type: {hospital.hospital_type}<br />
-          hospital_ownership: {hospital.hospital_ownership}<br />
-          emergency_services: {hospital.emergency_services.toString()}<br />
-          human_address: {hospital.human_address}<br />
-          latitude: {hospital.latitude}<br />
-          longitude: {hospital.longitude}<br />
+          Provider id: {hospital.provider_id}<br />
+          Address: {hospital.address}<br />
+          City: {hospital.city}<br />
+          State: {hospital.state}<br />
+          Zip code: {hospital.zip_code}<br />
+          County name: {hospital.county_name}<br />
+          Phone number: {hospital.phone_number}<br />
+          Hospital type: {hospital.hospital_type}<br />
+          Hospital ownership: {hospital.hospital_ownership}<br />
+          Has emergency services: {hospital.emergency_services ? "Yes" : "No"}<br />
+          {/*Latitude: {hospital.latitude}<br />
+          Longitude: {hospital.longitude}<br />*/}
+          <Link href={`https://www.google.com/maps/@${hospital.latitude},${hospital.longitude},14z`}><a className={styles.normalLink}>Directions on Google Maps</a></Link>
           </Typography>
           </>
         </AccordionDetails>
