@@ -196,7 +196,13 @@ export default function Home(props) {
           <div className={`${styles.aic} ${styles.tac}`}>
             <h2>Search by: {searchType}</h2>
             {/* search boxes */}
-            <Grid container direction={"row"} spacing={1}>
+            <Grid
+              container
+              direction={"row"}
+              spacing={1}
+              alignItems="center"
+              justifyContent="center"
+            >
               {searchType === "citystate" && (
                 <Grid item>
                   <StyledTextField
@@ -226,6 +232,7 @@ export default function Home(props) {
               <Grid item>
                 <Checkbox
                   checked={hasER}
+                  name="Has ER"
                   onChange={(event) => {
                     setHasER(event.target.checked);
                   }}
@@ -238,6 +245,7 @@ export default function Home(props) {
                   }}
                 />
               </Grid>
+              <p>Has ER</p>
             </Grid>
             {hasER.toString()}
 
