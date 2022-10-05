@@ -16,7 +16,6 @@ const links = [
 export default function SearchLinks(props) { 
     return (
         <div>
-          {props.currentVal}
           <h2>Search by:</h2>
           <p>{links.flatMap(
               (value, index, array) =>
@@ -26,7 +25,7 @@ export default function SearchLinks(props) {
               ((index < array.length - 2) || (index === array.length -2 && props.currentVal !== array[array.length - 1][0]))// check for the last item
               ? [value[1], " | "]
               : value[1],
-)}</p>
+              )}</p>
         </div>
       );
 }

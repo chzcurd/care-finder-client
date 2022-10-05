@@ -216,6 +216,7 @@ export default function Home(props) {
             {hospitals && (
               <div className={styles.tac}>
                 <h1>{hospitals.length} hospitals found: </h1>
+                <br />
                 {hospitals.map((hospital, index) => (
                   <ShowHospital
                     hospital={hospital}
