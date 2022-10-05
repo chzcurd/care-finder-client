@@ -64,6 +64,7 @@ const routeLengthMap = {
 export default function Home(props) {
   const [token, setToken] = useState(null);
   const [hospitals, setHospitals] = useState(null);
+  const [hospitalsWithER, setHospitalsWithER] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   //input from text field 1
   const [search1, setSearch1] = useState(null);
@@ -72,7 +73,7 @@ export default function Home(props) {
   //input to pass into api
   const [search, setSearch] = useState(null);
 
-  const [hasER, setHasER] = useState(true);
+  const [hasER, setHasER] = useState(false);
 
   //Search Type
   const searchType = props.searchId[0];
@@ -167,6 +168,13 @@ export default function Home(props) {
         console.log(hospitals);
         if (hospitals != null) {
           setHospitals(hospitals);
+          const hospitalsER = [];
+          hospitals.map((hospital) => {
+            if (hospital.emergency_services === true) {
+              hospitalsER.push(hospital);
+            }
+          });
+          setHospitalsWithER(hospitalsER);
         }
         setIsLoading(false);
       }
@@ -250,27 +258,29 @@ export default function Home(props) {
             {isLoading && <LinearProgress />}
             {hospitals && (
               <div className={styles.tac}>
-                <h1>{hospitals.length} hospitals found: </h1>
+                <h1>
+                  {hasER ? hospitalsWithER.length : hospitals.length} hospitals
+                  found:{" "}
+                </h1>
                 <br />
-                {hospitals.map((hospital, index) => {
-                  if (hasER) {
-                    return (
-                      hospital.emergency_services && (
+                {hasER
+                  ? hospitalsWithER.map((hospital, index) => {
+                      return (
+                        <ShowHospital
+                          hospital={hospital}
+                          key={`showHospital-ER-${index}`}
+                        />
+                      );
+                    })
+                  : hospitals.map((hospital, index) => {
+                      return (
                         <ShowHospital
                           hospital={hospital}
                           key={`showHospital-${index}`}
                         />
-                      )
-                    );
-                  } else {
-                    return (
-                      <ShowHospital
-                        hospital={hospital}
-                        key={`showHospital-${index}`}
-                      />
-                    );
-                  }
-                })}
+                      );
+                    })}
+                {}
               </div>
             )}
           </div>
