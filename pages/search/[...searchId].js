@@ -1,20 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { makeGET, proxyGET, proxyReq } from "../../helpers/httpHelpers";
-import {
-  getAllHospitals,
-  getHospitalsByRoute,
-  getKey,
-} from "../../helpers/apiClient";
+import { getHospitalsByRoute, getKey } from "../../helpers/apiClient";
 import ShowHospital from "../../components/hospitalDisplays/ShowHospital";
 import styles from "../../styles/home.module.scss";
-import {
-  CircularProgress,
-  LinearProgress,
-  TextField,
-  withTheme,
-} from "@mui/material";
+import { CircularProgress, LinearProgress, TextField } from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { styled } from "@mui/material/styles";
@@ -190,7 +180,7 @@ export default function Home(props) {
             Welcome to Care Finder
           </Link>
         </h1>
-        <SearchLinks />
+        <SearchLinks currentVal={searchType} />
 
         {!token && <CircularProgress />}
         {token && (
