@@ -37,7 +37,7 @@ export default function ShowHospital(props) {
           Has emergency services: {hospital.emergency_services ? "Yes" : "No"}<br />
           {/*Latitude: {hospital.latitude}<br />
           Longitude: {hospital.longitude}<br />*/}
-          <Link href={`https://www.google.com/maps/search/?api=1&query=${hospital.latitude},${hospital.longitude}`}><a className={styles.normalLink}>View on Google Maps</a></Link>
+          <a target="_blank" rel="noopener noreferrer" href={`https://www.google.com/maps/search/?api=1&query=${hospital.latitude},${hospital.longitude}`} className={styles.normalLink}>View on Google Maps</a>
           </Typography>
           </>
         </AccordionDetails>

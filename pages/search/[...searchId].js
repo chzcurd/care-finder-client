@@ -255,6 +255,7 @@ export default function Home(props) {
               <p>Has Emergency Services</p>
             </Grid>
 
+            <br />
             {isLoading && <LinearProgress />}
             {hospitals && (
               <div className={styles.tac}>
