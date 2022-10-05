@@ -252,7 +252,7 @@ export default function Home(props) {
                   }}
                 />
               </Grid>
-              <p>Has ER</p>
+              <p>Has Emergency Services</p>
             </Grid>
 
             {isLoading && <LinearProgress />}
