@@ -4,12 +4,19 @@ import { useEffect, useState } from "react";
 import { getHospitalsByRoute, getKey } from "../../helpers/apiClient";
 import ShowHospital from "../../components/hospitalDisplays/ShowHospital";
 import styles from "../../styles/home.module.scss";
-import { CircularProgress, LinearProgress, TextField } from "@mui/material";
+import {
+  CircularProgress,
+  Grid,
+  LinearProgress,
+  TextField,
+  Checkbox,
+} from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { styled } from "@mui/material/styles";
 import SearchLinks from "../../components/links/Links";
 import Link from "next/link";
+import { common, blue, blueGrey } from "@mui/material/colors";
 
 const StyledTextField = styled(TextField)({
   [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
@@ -65,6 +72,8 @@ export default function Home(props) {
   const [search2, setSearch2] = useState(null);
   //input to pass into api
   const [search, setSearch] = useState(null);
+
+  const [hasER, setHasER] = useState(true);
 
   //Search Type
   const searchType = props.searchId[0];
@@ -187,30 +196,50 @@ export default function Home(props) {
           <div className={`${styles.aic} ${styles.tac}`}>
             <h2>Search by: {searchType}</h2>
             {/* search boxes */}
-            <div /*style={{ background: "white" }}*/>
+            <Grid container direction={"row"} spacing={1}>
               {searchType === "citystate" && (
-                <StyledTextField
-                  id="city"
-                  defaultValue=""
-                  variant="outlined"
-                  label="City"
-                  onChange={(event) => {
-                    setSearch2(event.target.value);
-                  }}
-                />
+                <Grid item>
+                  <StyledTextField
+                    id="city"
+                    defaultValue=""
+                    variant="outlined"
+                    label="City"
+                    onChange={(event) => {
+                      setSearch2(event.target.value);
+                    }}
+                  />
+                </Grid>
               )}
               {searchType !== "all" && (
-                <StyledTextField
-                  id="state"
-                  defaultValue=""
-                  variant="outlined"
-                  onChange={(event) => {
-                    setSearch1(event.target.value);
-                  }}
-                  label={search1Label}
-                />
+                <Grid item>
+                  <StyledTextField
+                    id="state"
+                    defaultValue=""
+                    variant="outlined"
+                    onChange={(event) => {
+                      setSearch1(event.target.value);
+                    }}
+                    label={search1Label}
+                  />
+                </Grid>
               )}
-            </div>
+              <Grid item>
+                <Checkbox
+                  checked={hasER}
+                  onChange={(event) => {
+                    setHasER(event.target.checked);
+                  }}
+                  inputProps={{ "aria-label": "emergency-room" }}
+                  sx={{
+                    color: blue[50],
+                    "&.Mui-checked": {
+                      color: blue[100],
+                    },
+                  }}
+                />
+              </Grid>
+            </Grid>
+            {hasER.toString()}
 
             {isLoading && <LinearProgress />}
             {hospitals && (
