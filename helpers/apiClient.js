@@ -1,9 +1,9 @@
 import { makeGET, proxyGET, proxyReq } from "./httpHelpers";
 
 export async function getKey() {
-  let key = await makeGET("/api/key/get");
-  console.log(key);
-  key = key.xml.key;
+  const resp = await makeGET("/api/key/get");
+  console.log(resp);
+  const key = resp.key;
   let create = await makeGET("/api/key/create/" + key + "/5/5");
 
   if (create) {
@@ -16,7 +16,7 @@ export async function getAllHospitals(key) {
   if (resp == null) {
     return null;
   } else {
-    const itemArray = resp.xml.item;
+    const itemArray = resp.item;
     return itemArray;
   }
 }
@@ -26,7 +26,7 @@ export async function getHospitalById(id, key) {
   if (resp == null) {
     return null;
   } else {
-    const itemArray = resp.xml.item;
+    const itemArray = resp.item;
     return itemArray;
   }
 }
@@ -36,7 +36,7 @@ export async function getHospitalByCity(city, key) {
   if (resp == null) {
     return null;
   } else {
-    const itemArray = resp.xml.item;
+    const itemArray = resp.item;
     return itemArray;
   }
 }
@@ -46,7 +46,7 @@ export async function getHospitalByState(state, key) {
   if (resp == null) {
     return null;
   } else {
-    const itemArray = resp.xml.item;
+    const itemArray = resp.item;
     return itemArray;
   }
 }
@@ -56,7 +56,7 @@ export async function getHospitalByCounty(county, key) {
   if (resp == null) {
     return null;
   } else {
-    const itemArray = resp.xml.item;
+    const itemArray = resp.item;
     return itemArray;
   }
 }
@@ -69,7 +69,7 @@ export async function getHospitalByCityState(city, state, key) {
   if (resp == null) {
     return null;
   } else {
-    const itemArray = resp.xml.item;
+    const itemArray = resp.item;
     return itemArray;
   }
 }
@@ -79,7 +79,7 @@ export async function getHospitalByName(name, key) {
   if (resp == null) {
     return null;
   } else {
-    const itemArray = resp.xml.item;
+    const itemArray = resp.item;
     return itemArray;
   }
 }

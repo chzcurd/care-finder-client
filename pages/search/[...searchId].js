@@ -9,7 +9,12 @@ import {
 } from "../../helpers/apiClient";
 import ShowHospital from "../../components/hospitalDisplays/ShowHospital";
 import styles from "../../styles/home.module.scss";
-import { CircularProgress, TextField, withTheme } from "@mui/material";
+import {
+  CircularProgress,
+  LinearProgress,
+  TextField,
+  withTheme,
+} from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { styled } from "@mui/material/styles";
@@ -63,6 +68,7 @@ export default function Home(props) {
   const [token, setToken] = useState(null);
   const [hospitals, setHospitals] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
   //input from text field 1
   const [search1, setSearch1] = useState(null);
   //input from text field 2
@@ -186,7 +192,7 @@ export default function Home(props) {
         </h1>
         <SearchLinks />
 
-        {(!token || isLoading) && <CircularProgress />}
+        {!token && <CircularProgress />}
         {token && (
           <div className={`${styles.aic} ${styles.tac}`}>
             <h2>Search by: {searchType}</h2>
@@ -216,11 +222,15 @@ export default function Home(props) {
               )}
             </div>
 
+            {isLoading && <LinearProgress />}
             {hospitals && (
               <div className={styles.tac}>
                 <h1>{hospitals.length} hospitals found: </h1>
-                {hospitals.map((hospital) => (
-                  <ShowHospital hospital={hospital} />
+                {hospitals.map((hospital, index) => (
+                  <ShowHospital
+                    hospital={hospital}
+                    key={`showHospital-${index}`}
+                  />
                 ))}
               </div>
             )}

@@ -39,7 +39,11 @@ export async function makeGET(url, apiKey) {
 
     if (contentType === "application/xml") {
       return res.text().then((text) => {
-        return new XMLParser().parse(text);
+        const xml = new XMLParser().parse(text);
+        if (xml.xml == null) {
+          return null;
+        }
+        return xml.xml;
       });
     } else if (contentType === "application/json") {
       return await res.json();
@@ -83,7 +87,11 @@ export async function makePOST(url, body, key) {
 
     if (contentType === "application/xml") {
       return res.text().then((text) => {
-        return new XMLParser().parse(text);
+        const xml = new XMLParser().parse(text);
+        if (xml.xml == null) {
+          return null;
+        }
+        return xml.xml;
       });
     } else if (contentType === "application/json") {
       return await res.json();
