@@ -25,19 +25,17 @@ export default function ShowHospital(props) {
           <>
           <h1>{hospital.hospital_name}</h1>
           <Typography>
-          Provider id: {hospital.provider_id}<br />
-          Address: {hospital.address}<br />
-          City: {hospital.city}<br />
-          State: {hospital.state}<br />
-          Zip code: {hospital.zip_code}<br />
-          County name: {hospital.county_name}<br />
-          Phone number: {hospital.phone_number}<br />
-          Hospital type: {hospital.hospital_type}<br />
-          Hospital ownership: {hospital.hospital_ownership}<br />
+          Provider id: {hospital.provider_id || "Not provided"}<br />
+          Address: {hospital.address || "Not provided"}<br />
+          City: {hospital.city || "Not provided"}<br />
+          State: {hospital.state || "Not provided"}<br />
+          Zip code: {hospital.zip_code || "Not provided"}<br />
+          County name: {hospital.county_name || "Not provided"}<br />
+          Phone number: {hospital.phone_number || "Not provided"}<br />
+          Hospital type: {hospital.hospital_type || "Not provided"}<br />
+          Hospital ownership: {hospital.hospital_ownership || "Not provided"}<br />
           Has emergency services: {hospital.emergency_services ? "Yes" : "No"}<br />
-          {/*Latitude: {hospital.latitude}<br />
-          Longitude: {hospital.longitude}<br />*/}
-          <a target="_blank" rel="noopener noreferrer" href={`https://www.google.com/maps/search/?api=1&query=${hospital.latitude},${hospital.longitude}`} className={styles.normalLink}>View on Google Maps</a>
+          {(hospital.latitude && hospital.longitude) && <a target="_blank" rel="noopener noreferrer" href={`https://www.google.com/maps/search/?api=1&query=${hospital.latitude},${hospital.longitude}`} className={styles.normalLink}>View on Google Maps</a>}
           </Typography>
           </>
         </AccordionDetails>
