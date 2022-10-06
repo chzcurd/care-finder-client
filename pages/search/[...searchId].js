@@ -17,6 +17,7 @@ import { styled } from "@mui/material/styles";
 import SearchLinks from "../../components/links/Links";
 import Link from "next/link";
 import { common, blue, blueGrey } from "@mui/material/colors";
+import Header from "../../components/header/head";
 
 const StyledTextField = styled(TextField)({
   [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
@@ -184,11 +185,7 @@ export default function Home(props) {
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title>{`Care Finder | Search by ${searchType}`}</title>
-        <meta name="description" content="Care Finder client" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Header title={`Care Finder | Search by ${searchType}`} />
 
       <main className={styles.main}>
         <h1 className={styles.title}>

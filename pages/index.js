@@ -8,22 +8,15 @@ import styles from "../styles/home.module.scss";
 import { CircularProgress } from "@mui/material";
 import SearchLinks from "../components/links/Links";
 import Link from "next/link";
+import Header from "../components/header/head";
 
 export default function Home(props) {
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Care Finder</title>
-        <meta name="description" content="Care Finder client" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Header title="Care Finder" />
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          <Link href={"/"} as={`/`}>
-            Welcome to Care Finder
-          </Link>
-        </h1>
+        <h1 className={styles.title}>Welcome to Care Finder</h1>
 
         {props.hospitalsLength && (
           <p>Over {props.hospitalsLength} hospitals stored!</p>
