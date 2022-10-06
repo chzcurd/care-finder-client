@@ -168,13 +168,23 @@ export default function Home(props) {
         const hospitals = await getHospitalsByRoute(searchType, search, token);
         console.log(hospitals);
         if (hospitals != null) {
-          setHospitals(hospitals);
+          const hospitalComponents = [];
           const hospitalsER = [];
-          hospitals.map((hospital) => {
+          hospitals.map((hospital, index) => {
+            //hospital itself
+            const hospitalComp = (
+              <ShowHospital
+                hospital={hospital}
+                key={`ShowHospital-${hospital.provider_id}`}
+              />
+            );
+            hospitalComponents.push(hospitalComp);
             if (hospital.emergency_services === true) {
-              hospitalsER.push(hospital);
+              hospitalsER.push(hospitalComp);
             }
           });
+
+          setHospitals(hospitalComponents);
           setHospitalsWithER(hospitalsER);
         }
         setIsLoading(false);
@@ -271,24 +281,7 @@ export default function Home(props) {
                   found:{" "}
                 </h1>
                 <br />
-                {hasER
-                  ? hospitalsWithER.map((hospital, index) => {
-                      return (
-                        <ShowHospital
-                          hospital={hospital}
-                          key={`showHospital-ER-${index}`}
-                        />
-                      );
-                    })
-                  : hospitals.map((hospital, index) => {
-                      return (
-                        <ShowHospital
-                          hospital={hospital}
-                          key={`showHospital-${index}`}
-                        />
-                      );
-                    })}
-                {}
+                {hasER ? hospitalsWithER : hospitals}
               </div>
             )}
           </div>
