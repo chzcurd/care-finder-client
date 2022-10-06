@@ -8,9 +8,14 @@ import styles from "../../styles/home.module.scss";
 
 
 export default function ShowHospital(props) {
+
     const hospital = props.hospital
-    return (
-        <div>
+    //console.log(props)
+
+    console.log("render")
+      return (
+        <>
+        {(props.hideValue && props.hospital.emergency_services === false) ? <></> : (<div>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -38,6 +43,12 @@ export default function ShowHospital(props) {
           </>
         </AccordionDetails>
       </Accordion>
-        </div>
+        </div>)}
+
+        
+        </>
       );
+    
+
+    
 }

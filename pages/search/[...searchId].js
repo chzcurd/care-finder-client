@@ -172,20 +172,13 @@ export default function Home(props) {
           const hospitalsER = [];
           hospitals.map((hospital, index) => {
             //hospital itself
-            const hospitalComp = (
-              <ShowHospital
-                hospital={hospital}
-                hideValue={hasER}
-                key={`ShowHospital-${hospital.provider_id}`}
-              />
-            );
-            hospitalComponents.push(hospitalComp);
+            //hospitalComponents.push(hospitalComp);
             if (hospital.emergency_services === true) {
               hospitalsER.push("");
             }
           });
 
-          setHospitals(hospitalComponents);
+          setHospitals(hospitals);
           setHospitalsWithER(hospitalsER);
         } else {
           setHospitals([]);
@@ -304,7 +297,15 @@ export default function Home(props) {
                     : ""}
                 </h1>
                 <br />
-                {hospitals}
+                {hospitals.map((hospital, index) => {
+                  return (
+                    <ShowHospital
+                      hospital={hospital}
+                      hideValue={hasER}
+                      key={`ShowHospital-${hospital.provider_id}`}
+                    />
+                  );
+                })}
               </div>
             )}
           </div>
