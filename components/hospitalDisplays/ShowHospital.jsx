@@ -7,15 +7,26 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import styles from "../../styles/home.module.scss";
 
 
-export default function ShowHospital(props) {
+export default class ShowHospital extends Component {
+  shouldComponentUpdate(nextProps) {
+    // Rendering the component only if 
+    // passed props value is changed
+  
+    if (nextProps.hospital !== this.props.hospital || (this.props.hospital.emergency_services === false && (nextProps.hideValue !== this.props.hideValue))) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-    const hospital = props.hospital
+  render(){
+    const hospital = this.props.hospital
     //console.log(props)
 
     console.log("render")
       return (
         <>
-        {(props.hideValue && props.hospital.emergency_services === false) ? <></> : (<div>
+        {(this.props.hideValue && this.props.hospital.emergency_services === false) ? <></> : (<div>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -51,4 +62,4 @@ export default function ShowHospital(props) {
     
 
     
-}
+}}
