@@ -210,7 +210,15 @@ export default function Home(props) {
             paddingBottom: "10%",
           }}
         >
-          <Image src={"/medLogo.png"} layout="fill" objectFit="contain"></Image>
+          <Link href={"/"} as={`/`}>
+            <a>
+              <Image
+                src={"/medLogo.png"}
+                layout="fill"
+                objectFit="contain"
+              ></Image>
+            </a>
+          </Link>
         </div>
         <h1 className={styles.title}>
           <Link href={"/"} as={`/`}>
