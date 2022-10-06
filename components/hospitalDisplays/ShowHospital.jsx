@@ -1,18 +1,16 @@
-import React from "react";
+import React, { Component } from "react";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Link from "next/link";
 import styles from "../../styles/home.module.scss";
 
 
-export default function ShowHospital(props) { 
+export default function ShowHospital(props) {
     const hospital = props.hospital
     return (
         <div>
-
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

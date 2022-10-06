@@ -175,17 +175,21 @@ export default function Home(props) {
             const hospitalComp = (
               <ShowHospital
                 hospital={hospital}
+                hideValue={hasER}
                 key={`ShowHospital-${hospital.provider_id}`}
               />
             );
             hospitalComponents.push(hospitalComp);
             if (hospital.emergency_services === true) {
-              hospitalsER.push(hospitalComp);
+              hospitalsER.push("");
             }
           });
 
           setHospitals(hospitalComponents);
           setHospitalsWithER(hospitalsER);
+        } else {
+          setHospitals([]);
+          setHospitalsWithER([]);
         }
         setIsLoading(false);
       }
@@ -269,7 +273,11 @@ export default function Home(props) {
                   }}
                 />
               </Grid>
-              <p>Has Emergency Services</p>
+              <p>
+                Only show hospitals with
+                <br />
+                Emergency Services
+              </p>
             </Grid>
 
             <br />
@@ -281,7 +289,7 @@ export default function Home(props) {
                   found:{" "}
                 </h1>
                 <br />
-                {hasER ? hospitalsWithER : hospitals}
+                {hospitals}
               </div>
             )}
           </div>
