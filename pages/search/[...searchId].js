@@ -294,7 +294,14 @@ export default function Home(props) {
               <div className={styles.tac}>
                 <h1>
                   {hasER ? hospitalsWithER.length : hospitals.length} hospitals
-                  found:{" "}
+                  found
+                  {hasER
+                    ? hospitalsWithER.length !== 0
+                      ? ":"
+                      : ""
+                    : hospitals.length !== 0
+                    ? ":"
+                    : ""}
                 </h1>
                 <br />
                 {hospitals}
