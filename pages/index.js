@@ -16,6 +16,16 @@ export default function Home(props) {
       <Header title="Care Finder" />
 
       <main className={styles.main}>
+        <div
+          style={{
+            position: "relative",
+            height: "10%",
+            width: "10%",
+            paddingBottom: "10%",
+          }}
+        >
+          <Image src={"/medLogo.png"} layout="fill" objectFit="contain"></Image>
+        </div>
         <h1 className={styles.title}>Welcome to Care Finder</h1>
 
         {props.hospitalsLength && (
