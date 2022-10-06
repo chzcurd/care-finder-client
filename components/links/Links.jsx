@@ -3,13 +3,13 @@ import React from "react";
 
 
 const links = [
-  ["all",<Link href={'/search/[..searchid]'} as={`/search/all`}>all</Link>] ,
-  ["id",<Link href={'/search/[..searchid]'} as={`/search/id`}>id</Link>],
-  ["city",<Link href={'/search/[..searchid]'} as={`/search/city`}>city</Link>],
-  ["state",<Link href={'/search/[..searchid]'} as={`/search/state`}>state</Link>],
-  ["county",<Link href={'/search/[..searchid]'} as={`/search/county`}>county</Link>],
-  ["citystate",<Link href={'/search/[..searchid]'} as={`/search/citystate`}>citystate</Link>],
-  ["name",<Link href={'/search/[..searchid]'} as={`/search/name`}>name</Link>]
+  ["all",<Link key={"link-1"} href={'/search/[..searchid]'} as={`/search/all`}>all</Link>] ,
+  ["id",<Link key={"link-2"} href={'/search/[..searchid]'} as={`/search/id`}>id</Link>],
+  ["city",<Link key={"link-3"} href={'/search/[..searchid]'} as={`/search/city`}>city</Link>],
+  ["state",<Link key={"link-4"} href={'/search/[..searchid]'} as={`/search/state`}>state</Link>],
+  ["county",<Link key={"link-5"} href={'/search/[..searchid]'} as={`/search/county`}>county</Link>],
+  ["citystate",<Link key={"link-6"} href={'/search/[..searchid]'} as={`/search/citystate`}>citystate</Link>],
+  ["name",<Link key={"link-7"} href={'/search/[..searchid]'} as={`/search/name`}>name</Link>]
 ]
 
 
