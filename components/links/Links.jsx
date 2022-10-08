@@ -12,7 +12,9 @@ const links = [
   ["name",<Link key={"link-7"} href={'/search/[..searchid]'} as={`/search/name`}>name</Link>]
 ]
 
-
+/**
+ * Search links for all api routes. Current page is is hidden from the links to prevent nextjs throwing a routing error / look nicer
+ */
 export default function SearchLinks(props) { 
     return (
         <div>

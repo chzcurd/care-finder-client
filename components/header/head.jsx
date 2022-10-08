@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-
+//Header tags that will be on every page, needed for custom favicon
 export default function Header(props) {
 return (<Head>
         <title>{props.title}</title>

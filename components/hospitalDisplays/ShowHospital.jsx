@@ -8,10 +8,12 @@ import styles from "../../styles/home.module.scss";
 
 
 export default class ShowHospital extends Component {
+  //Massive performance improvement by only rerendering if the hospital will actually be hidden
   shouldComponentUpdate(nextProps) {
     // Rendering the component only if 
     // passed props value is changed
   
+    //only rerender if the hospital changes, or if the component should be hidden.
     if (nextProps.hospital !== this.props.hospital || (this.props.hospital.emergency_services === false && (nextProps.hideValue !== this.props.hideValue))) {
       return true;
     } else {
@@ -19,6 +21,7 @@ export default class ShowHospital extends Component {
     }
   }
 
+  //render the component
   render(){
     const hospital = this.props.hospital
     //console.log(props)
@@ -27,6 +30,7 @@ export default class ShowHospital extends Component {
       return (
         <>
         {(this.props.hideValue && this.props.hospital.emergency_services === false) ? <></> : (<div>
+      {/* Wrap the hospitals in an acordion so it can be easier to look through */}
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -35,6 +39,7 @@ export default class ShowHospital extends Component {
         >
           <Typography>{hospital.hospital_name}</Typography>
         </AccordionSummary>
+        {/* Inside the Accordion */}
         <AccordionDetails>
           <>
           <h1>{hospital.hospital_name}</h1>
@@ -49,6 +54,7 @@ export default class ShowHospital extends Component {
           Hospital type: {hospital.hospital_type || "Not provided"}<br />
           Hospital ownership: {hospital.hospital_ownership || "Not provided"}<br />
           Has emergency services: {hospital.emergency_services ? "Yes" : "No"}<br />
+          {/* Google maps api takes gps cords and opens the map in a new tab */}
           {(hospital.latitude && hospital.longitude) && <a target="_blank" rel="noopener noreferrer" href={`https://www.google.com/maps/search/?api=1&query=${hospital.latitude},${hospital.longitude}`} className={styles.normalLink}>View on Google Maps</a>}
           </Typography>
           </>
