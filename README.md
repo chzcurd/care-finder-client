@@ -4,13 +4,20 @@ Created by Josh Osmanski
 
 ## How to install
 
-First, have node.js installed on the system, then:
+First, install node.js 16.17.1 or newer, then:
 
 ```bash
 npm install
 ```
 
 ## Getting Started
+
+Running server in production or for demo:
+
+```bash
+npm run build
+npm run start
+```
 
 Run the development server using:
 
