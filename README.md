@@ -4,7 +4,7 @@ Created by Josh Osmanski
 
 ## How to install
 
-First, install node.js 16.17.1 or newer, then:
+First, install node.js 16 or newer, then:
 
 ```bash
 npm install
