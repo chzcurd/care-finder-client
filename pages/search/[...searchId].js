@@ -138,7 +138,7 @@ export default function Home(props) {
           let hospitalsER = 0;
 
           //If 1 hospital is returned, wrap in array so it doesn't crash
-          if (hospitals.map !== "function") {
+          if (typeof hospitals.map !== "function") {
             hospitals = [hospitals];
           }
 
