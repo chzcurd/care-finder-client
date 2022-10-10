@@ -132,10 +132,16 @@ export default function Home(props) {
       //console.log(token);
       if (token != null && search != null) {
         setIsLoading(true);
-        const hospitals = await getHospitalsByRoute(searchType, search, token);
+        let hospitals = await getHospitalsByRoute(searchType, search, token);
         //console.log(hospitals);
         if (hospitals != null) {
           let hospitalsER = 0;
+
+          //If 1 hospital is returned, wrap in array so it doesn't crash
+          if (hospitals.map !== "function") {
+            hospitals = [hospitals];
+          }
+
           hospitals.map((hospital, index) => {
             //hospital itself
             //hospitalComponents.push(hospitalComp);
