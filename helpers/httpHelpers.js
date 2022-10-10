@@ -24,7 +24,7 @@ export async function makeGET(url, apiKey) {
     headers: { "x-api-key": apiKey },
   });
 
-  console.log(res);
+  //console.log(res);
 
   //Pull out the content type and decode to object
   try {
@@ -92,7 +92,7 @@ export async function makePOST(url, body, apiKey) {
   //send POST request with data
   const res = await fetch(url, options);
 
-  console.log(res);
+  //console.log(res);
 
   //If error occured return null
   if (!res.ok) {

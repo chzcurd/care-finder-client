@@ -26,7 +26,7 @@ export default class ShowHospital extends Component {
     const hospital = this.props.hospital
     //console.log(props)
 
-    console.log("render")
+    //console.log("render")
       return (
         <>
         {(this.props.hideValue && this.props.hospital.emergency_services === false) ? <></> : (<div>

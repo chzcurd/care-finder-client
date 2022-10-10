@@ -9,7 +9,7 @@ import { makeGET, proxyGET, proxyReq } from "./httpHelpers";
 export async function getKey() {
   //make a key from the server
   const resp = await makeGET("/api/key/get");
-  console.log(resp);
+  //console.log(resp);
   const key = resp.key;
 
   //pass key back to server with create route to ensure it is valid
@@ -112,38 +112,38 @@ export async function getHospitalsByRoute(route, search, key) {
   switch (route) {
     //no path
     case "all":
-      console.log("all");
+      //console.log("all");
       return await getAllHospitals(key);
 
     //id
     case "id":
-      console.log("id");
+      //console.log("id");
       return await getHospitalById(search, key);
 
     //city
     case "city":
-      console.log("city");
+      //console.log("city");
       return await getHospitalByCity(search, key);
 
     //state
     case "state":
-      console.log("state");
+      //console.log("state");
       return await getHospitalByState(search, key);
 
     //county
     case "county":
-      console.log("county");
+      //console.log("county");
       return await getHospitalByCounty(search, key);
 
     //citystate
     case "citystate":
       const cityState = search.split("/");
-      console.log("citystate");
+      //console.log("citystate");
       return await getHospitalByCityState(cityState[0], cityState[1], key);
 
     //name
     case "name":
-      console.log("name");
+      //console.log("name");
       return await getHospitalByName(search, key);
   }
 }

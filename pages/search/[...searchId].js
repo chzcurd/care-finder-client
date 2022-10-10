@@ -58,13 +58,13 @@ export default function Home(props) {
     switch (searchType) {
       //no path
       case "all":
-        console.log("all");
+        //console.log("all");
         setSearch("all");
         break;
 
       //id
       case "id":
-        console.log("id");
+        //console.log("id");
         if (search1 != null && search1.length > 0) {
           setSearch(search1);
         }
@@ -72,7 +72,7 @@ export default function Home(props) {
 
       //city
       case "city":
-        console.log("city");
+        //console.log("city");
         if (search1 != null && search1.length > 0) {
           setSearch(search1);
         }
@@ -80,7 +80,7 @@ export default function Home(props) {
 
       //state
       case "state":
-        console.log("state");
+        //console.log("state");
         if (search1 != null && search1.length === 2) {
           setSearch(search1);
         }
@@ -107,7 +107,7 @@ export default function Home(props) {
 
       //name
       case "name":
-        console.log("name");
+        //console.log("name");
         if (search1 != null && search1.length > 0) {
           setSearch(search1);
         }
@@ -127,13 +127,13 @@ export default function Home(props) {
   //fetch hospital data
   useEffect(() => {
     async function fetchData() {
-      console.log(search);
-      console.log(searchType);
-      console.log(token);
+      //console.log(search);
+      //console.log(searchType);
+      //console.log(token);
       if (token != null && search != null) {
         setIsLoading(true);
         const hospitals = await getHospitalsByRoute(searchType, search, token);
-        console.log(hospitals);
+        //console.log(hospitals);
         if (hospitals != null) {
           let hospitalsER = 0;
           hospitals.map((hospital, index) => {
