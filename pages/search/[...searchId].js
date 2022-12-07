@@ -48,7 +48,6 @@ export default function Home(props) {
 
   //session
   const { data: session } = useSession();
-  console.log("session", session);
 
   //Search Type
   const searchType = props.searchId[0];
@@ -122,12 +121,10 @@ export default function Home(props) {
 
   //Fetch the api key that is needed
   useEffect(() => {
-    async function fetchData() {
-      const key = await getKey();
-      setToken(key);
+    if (session) {
+      setToken(session.jwt);
     }
-    fetchData();
-  }, []);
+  }, [session]);
 
   //fetch hospital data
   useEffect(() => {
@@ -204,7 +201,7 @@ export default function Home(props) {
         <SearchLinks currentVal={searchType} />
 
         {/* Wait for the API key to be returned from the backend */}
-        {!token && <CircularProgress />}
+        {!token && <p>Please log in</p>}
 
         {/* Key is good, show seach options */}
         {token && (

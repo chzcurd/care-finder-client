@@ -6,22 +6,6 @@ import { makeGET, makePOST, proxyGET, proxyReq } from "./httpHelpers";
  */
 
 // Gets an API key from the backend and makes sure it is valid
-export async function getKey() {
-  //make a key from the server
-  //const resp = await makeGET("/api/key/get");
-  //console.log(resp);
-  //const key = resp.key;
-
-  //pass key back to server with create route to ensure it is valid
-  //let create = await makeGET("/api/key/create/" + key + "/5/5");
-
-  //Return the key if it is valid
-  //TODO: write login function
-  return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Impvc2giLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjcwNDQzOTEwLCJleHAiOjE2NzA1MzAzMTB9.p4b2r8ZGDrPeBjF8V0cs1TPurALgVL6eVlaSJMH6GYU";
-  if (create) {
-    return key;
-  }
-}
 
 export async function loginUser(loginBody) {
   console.log("loginBody");

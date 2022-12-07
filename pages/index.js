@@ -48,13 +48,13 @@ export default function Home(props) {
 //Nextjs automatically caches serverside props for faster performace
 export async function getServerSideProps(context) {
   //Grab all the hospitals to get the length
-  const key = await getKey();
-  const hospitals = await getAllHospitals(key);
+  //const key = await getKey();
+  //const hospitals = await getAllHospitals(key);
 
   //Only return the length of the array as the hospitals are not actually shown on the main page
   return {
     props: {
-      hospitalsLength: hospitals.length,
+      hospitalsLength: 0,
     },
   };
 
