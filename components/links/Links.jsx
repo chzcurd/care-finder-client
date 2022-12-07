@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const links = [
   [
@@ -50,8 +51,29 @@ const links = [
  * Search links for all api routes. Current page is is hidden from the links to prevent nextjs throwing a routing error / look nicer
  */
 export default function SearchLinks(props) {
+  const handleSignin = (e) => {
+    e.preventDefault();
+    signIn();
+  };
+
+  const handleSignout = (e) => {
+    e.preventDefault();
+    signOut();
+  };
+
+  const { data: session } = useSession();
   return (
     <div>
+      {session && (
+        <a href="#" onClick={handleSignout} className="btn-signin">
+          SIGN OUT
+        </a>
+      )}
+      {!session && (
+        <a href="#" onClick={handleSignin} className="btn-signin">
+          SIGN IN
+        </a>
+      )}
       <h2>Search by:</h2>
       <p>
         {links.flatMap((value, index, array) =>

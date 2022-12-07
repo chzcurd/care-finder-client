@@ -71,15 +71,14 @@ export async function makeGET(url, apiKey) {
 export async function makePOST(url, body, apiKey) {
   //TODO Support sending XML
   let contentType = "json";
-  contentType = "xml";
 
   //Set up POST options
   const options = {
     method: "POST",
-    body: body,
+    body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/" + contentType,
-      jwt: apiKey,
+      //jwt: apiKey,
     },
     mode: "cors",
   };
@@ -91,6 +90,7 @@ export async function makePOST(url, body, apiKey) {
 
   //send POST request with data
   const res = await fetch(url, options);
+  console.log("options");
 
   //console.log(res);
 

@@ -1,4 +1,4 @@
-import { makeGET, proxyGET, proxyReq } from "./httpHelpers";
+import { makeGET, makePOST, proxyGET, proxyReq } from "./httpHelpers";
 
 /**
  * apiClient contains all functions that get/send data to/from the backend server
@@ -21,6 +21,14 @@ export async function getKey() {
   if (create) {
     return key;
   }
+}
+
+export async function loginUser(loginBody) {
+  console.log("loginBody");
+  console.log(loginBody);
+  let resp = await makePOST("/api/auth/login", loginBody, "");
+  console.log(resp);
+  return resp;
 }
 
 //Route to get all hospitals
