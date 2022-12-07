@@ -8,14 +8,16 @@ import { makeGET, proxyGET, proxyReq } from "./httpHelpers";
 // Gets an API key from the backend and makes sure it is valid
 export async function getKey() {
   //make a key from the server
-  const resp = await makeGET("/api/key/get");
+  //const resp = await makeGET("/api/key/get");
   //console.log(resp);
-  const key = resp.key;
+  //const key = resp.key;
 
   //pass key back to server with create route to ensure it is valid
-  let create = await makeGET("/api/key/create/" + key + "/5/5");
+  //let create = await makeGET("/api/key/create/" + key + "/5/5");
 
   //Return the key if it is valid
+  //TODO: write login function
+  return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Impvc2giLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjcwNDQzOTEwLCJleHAiOjE2NzA1MzAzMTB9.p4b2r8ZGDrPeBjF8V0cs1TPurALgVL6eVlaSJMH6GYU";
   if (create) {
     return key;
   }
@@ -27,51 +29,53 @@ export async function getAllHospitals(key) {
   if (resp == null) {
     return null;
   } else {
-    const itemArray = resp.item;
+    console.log(resp);
+    const itemArray = resp.data;
     return itemArray;
   }
 }
 
 //Route to search by id
 export async function getHospitalById(id, key) {
-  let resp = await makeGET("/api/hospitals/id/" + id, key);
+  let resp = await makeGET("/api/hospitals?id=" + id, key);
   if (resp == null) {
     return null;
   } else {
-    const itemArray = resp.item;
+    const itemArray = resp.data;
     return itemArray;
   }
 }
 
 //Route to search by city
 export async function getHospitalByCity(city, key) {
-  let resp = await makeGET("/api/hospitals/city/" + city, key);
+  let resp = await makeGET("/api/hospitals?city=" + city, key);
+  console.log(resp);
   if (resp == null) {
     return null;
   } else {
-    const itemArray = resp.item;
+    const itemArray = resp.data;
     return itemArray;
   }
 }
 
 //Route to search by state
 export async function getHospitalByState(state, key) {
-  let resp = await makeGET("/api/hospitals/state/" + state, key);
+  let resp = await makeGET("/api/hospitals?state=" + state, key);
   if (resp == null) {
     return null;
   } else {
-    const itemArray = resp.item;
+    const itemArray = resp.data;
     return itemArray;
   }
 }
 
 //Route to search by county
 export async function getHospitalByCounty(county, key) {
-  let resp = await makeGET("/api/hospitals/county/" + county, key);
+  let resp = await makeGET("/api/hospitals?county=" + county, key);
   if (resp == null) {
     return null;
   } else {
-    const itemArray = resp.item;
+    const itemArray = resp.data;
     return itemArray;
   }
 }
@@ -79,24 +83,24 @@ export async function getHospitalByCounty(county, key) {
 //Route to search by citystate
 export async function getHospitalByCityState(city, state, key) {
   let resp = await makeGET(
-    "/api/hospitals/citystate/" + state + "/" + city,
+    "/api/hospitals?state=" + state + "&city=" + city,
     key
   );
   if (resp == null) {
     return null;
   } else {
-    const itemArray = resp.item;
+    const itemArray = resp.data;
     return itemArray;
   }
 }
 
 //Route to search by hospital name
 export async function getHospitalByName(name, key) {
-  let resp = await makeGET("/api/hospitals/name/" + name, key);
+  let resp = await makeGET("/api/hospitals?name=" + name, key);
   if (resp == null) {
     return null;
   } else {
-    const itemArray = resp.item;
+    const itemArray = resp.data;
     return itemArray;
   }
 }

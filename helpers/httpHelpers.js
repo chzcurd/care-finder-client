@@ -1,7 +1,7 @@
 import { XMLParser } from "fast-xml-parser";
 
 //Set the API baseURL here
-const BASE_API_URL = "https://www.knautzfamilywi.com/CareFinder-1.0.0";
+const BASE_API_URL = "http://localhost:3000";
 
 //fetches the base URL for the API
 export function getUrlOrigin() {
@@ -21,7 +21,7 @@ export async function makeGET(url, apiKey) {
   //Grab the data
   const res = await fetch(url, {
     mode: "cors",
-    headers: { "x-api-key": apiKey },
+    headers: { jwt: apiKey },
   });
 
   //console.log(res);
@@ -79,7 +79,7 @@ export async function makePOST(url, body, apiKey) {
     body: body,
     headers: {
       "Content-Type": "application/" + contentType,
-      "x-api-key": apiKey,
+      jwt: apiKey,
     },
     mode: "cors",
   };
