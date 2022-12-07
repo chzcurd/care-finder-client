@@ -3,8 +3,11 @@ import { getAllHospitals, getKey } from "../helpers/apiClient";
 import styles from "../styles/home.module.scss";
 import SearchLinks from "../components/links/Links";
 import Header from "../components/header/head";
+import { useSession } from "next-auth/react";
 
 export default function Home(props) {
+  const { data: session } = useSession();
+  console.log("session", session);
   return (
     <div className={styles.container}>
       <Header title="Care Finder" />

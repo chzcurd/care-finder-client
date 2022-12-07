@@ -14,6 +14,7 @@ import Link from "next/link";
 import { blue } from "@mui/material/colors";
 import Header from "../../components/header/head";
 import { StyledTextField } from "../../styles/muiStyle";
+import { useSession } from "next-auth/react";
 
 //Valid routes for searches. Is also used for checking the valid parameter length for each route
 const routeLengthMap = {
@@ -44,6 +45,10 @@ export default function Home(props) {
   const [search, setSearch] = useState(null);
   //Toggle used to filter non-Emergency Services hospitals
   const [hasER, setHasER] = useState(false);
+
+  //session
+  const { data: session } = useSession();
+  console.log("session", session);
 
   //Search Type
   const searchType = props.searchId[0];
