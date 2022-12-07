@@ -143,7 +143,7 @@ export async function getHospitalsByRoute(route, search, key) {
     case "citystate":
       const cityState = search.split("/");
       //console.log("citystate");
-      return await getHospitalByCityState(cityState[0], cityState[1], key);
+      return await getHospitalByCityState(cityState[1], cityState[0], key);
 
     //name
     case "name":
