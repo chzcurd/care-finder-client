@@ -47,6 +47,27 @@ const links = [
   ],
 ];
 
+const adminLinks = [
+  [
+    "add",
+    <Link key={"admin-1"} href={"/admin/[..searchid]"} as={`/admin/add`}>
+      add
+    </Link>,
+  ],
+  [
+    "replace",
+    <Link key={"admin-2"} href={"/admin/[..searchid]"} as={`/admin/replace`}>
+      replace
+    </Link>,
+  ],
+  [
+    "delete",
+    <Link key={"admin-3"} href={"/admin/[..searchid]"} as={`/admin/delete`}>
+      delete
+    </Link>,
+  ],
+];
+
 /**
  * Search links for all api routes. Current page is is hidden from the links to prevent nextjs throwing a routing error / look nicer
  */
@@ -74,6 +95,26 @@ export default function SearchLinks(props) {
           SIGN IN
         </a>
       )}
+
+      {session?.isAdmin === true && (
+        <>
+          <h2>Admin Functions:</h2>
+          <p>
+            {adminLinks.flatMap((value, index, array) =>
+              //If route is the same, don't show link
+              value[0] === props.currentVal
+                ? null
+                : //if it isn't, then add delimiters
+                index < array.length - 2 ||
+                  (index === array.length - 2 &&
+                    props.currentVal !== array[array.length - 1][0]) // check for the last item
+                ? [value[1], " | "]
+                : value[1]
+            )}
+          </p>
+        </>
+      )}
+
       <h2>Search by:</h2>
       <p>
         {links.flatMap((value, index, array) =>
