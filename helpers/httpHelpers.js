@@ -88,6 +88,8 @@ export async function makePOST(url, body, apiKey) {
     url = getUrlOrigin() + url;
   }
 
+  console.log("url");
+  console.log(url);
   //send POST request with data
   const res = await fetch(url, options);
   console.log("options");

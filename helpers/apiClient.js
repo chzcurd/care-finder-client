@@ -15,6 +15,15 @@ export async function loginUser(loginBody) {
   return resp;
 }
 
+export async function createUser(loginBody) {
+  console.log("loginBody");
+  console.log(loginBody);
+  console.log("NEW USER");
+  let resp = await makePOST("/api/auth/signup", loginBody, "");
+  console.log(resp);
+  return resp;
+}
+
 //Route to get all hospitals
 export async function getAllHospitals(key) {
   let resp = await makeGET("/api/hospitals", key);
