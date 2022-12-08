@@ -78,7 +78,7 @@ export async function makePOST(url, body, apiKey) {
     body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/" + contentType,
-      //jwt: apiKey,
+      jwt: apiKey,
     },
     mode: "cors",
   };
