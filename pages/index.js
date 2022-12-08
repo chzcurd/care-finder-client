@@ -32,11 +32,6 @@ export default function Home(props) {
         {/* Title */}
         <h1 className={styles.title}>Welcome to Care Finder</h1>
 
-        {/* If the hospital length is stored, display it on the page */}
-        {props.hospitalsLength && (
-          <p>Over {props.hospitalsLength} hospitals stored!</p>
-        )}
-
         {/* Navigation links to search for hospitals */}
         <SearchLinks />
       </main>
@@ -44,19 +39,20 @@ export default function Home(props) {
   );
 }
 
+//Now that logins are authenticated, we can't get the hospital list this way :(
 //Runs server side to pre-fill props in html before sending to the browser
 //Nextjs automatically caches serverside props for faster performace
-export async function getServerSideProps(context) {
+/*export async function getServerSideProps(context) {
   //Grab all the hospitals to get the length
-  //const key = await getKey();
-  //const hospitals = await getAllHospitals(key);
+  const key = await getKey();
+  const hospitals = await getAllHospitals(key);
 
   //Only return the length of the array as the hospitals are not actually shown on the main page
   return {
     props: {
-      hospitalsLength: 0,
+      hospitalsLength: hospitals.length,
     },
   };
 
   // Rest of `getServerSideProps` code
-}
+}*/
