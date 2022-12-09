@@ -61,17 +61,21 @@ export default function Home(props) {
       case "add":
         //console.log("all");
         resp = await addHospital(data, session.jwt);
-        resp = [resp.data];
+
         break;
       case "replace":
         //console.log("all");
         resp = await replaceHospital(origid, data, session.jwt);
-        resp = [resp.data];
+        if (resp != null) {
+          resp = [resp.data];
+        }
         break;
       case "delete":
         //console.log("all");
         resp = await deleteHospital(data, session.jwt);
-        resp = resp.data;
+        if (resp != null) {
+          resp = resp.data;
+        }
         break;
     }
     console.log("data_back");
