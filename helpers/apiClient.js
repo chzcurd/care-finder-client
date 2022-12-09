@@ -1,4 +1,4 @@
-import { makeGET, makePOST, proxyGET, proxyReq } from "./httpHelpers";
+import { makeGET, makePPD, proxyGET, proxyReq } from "./httpHelpers";
 
 /**
  * apiClient contains all functions that get/send data to/from the backend server
@@ -10,7 +10,7 @@ import { makeGET, makePOST, proxyGET, proxyReq } from "./httpHelpers";
 export async function loginUser(loginBody) {
   console.log("loginBody");
   console.log(loginBody);
-  let resp = await makePOST("/api/auth/login", loginBody, "");
+  let resp = await makePPD("/api/auth/login", loginBody, "POST", "");
   console.log(resp);
   return resp;
 }
@@ -19,7 +19,25 @@ export async function createUser(loginBody) {
   console.log("loginBody");
   console.log(loginBody);
   console.log("NEW USER");
-  let resp = await makePOST("/api/auth/signup", loginBody, "");
+  let resp = await makePPD("/api/auth/signup", loginBody, "POST", "");
+  console.log(resp);
+  return resp;
+}
+
+export async function addHospital(body, jwt) {
+  let resp = await makePPD("/api/hospitals", body, "POST", jwt);
+  console.log(resp);
+  return resp;
+}
+
+export async function replaceHospital(origId, body, jwt) {
+  let resp = await makePPD(`/api/hospitals?id=${origId}`, body, "PUT", jwt);
+  console.log(resp);
+  return resp;
+}
+
+export async function deleteHospital(body, jwt) {
+  let resp = await makePPD("/api/hospitals", body, "DELETE", jwt);
   console.log(resp);
   return resp;
 }

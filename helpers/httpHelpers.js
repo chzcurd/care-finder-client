@@ -65,16 +65,15 @@ export async function makeGET(url, apiKey) {
 }
 
 /**
- * Makes a post request in either xml or json
- * (currently can only send xml)
+ * Makes a post/put/delete request in either xml or json
  */
-export async function makePOST(url, body, apiKey) {
+export async function makePPD(url, body, method, apiKey) {
   //TODO Support sending XML
   let contentType = "json";
 
-  //Set up POST options
+  //Set up options
   const options = {
-    method: "POST",
+    method: method,
     body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/" + contentType,

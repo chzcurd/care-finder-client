@@ -1,6 +1,10 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { getHospitalsByRoute, getKey } from "../../helpers/apiClient";
+import {
+  addHospital,
+  replaceHospital,
+  deleteHospital,
+} from "../../helpers/apiClient";
 import ShowHospital from "../../components/hospitalDisplays/ShowHospital";
 import styles from "../../styles/home.module.scss";
 import {
@@ -47,25 +51,32 @@ export default function Home(props) {
 
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     // Handle form submission here
     console.log(data);
+    let resp = null;
 
     switch (searchType) {
       //add
       case "add":
         //console.log("all");
-        //setSearch("all");
+        resp = await addHospital(data, session.jwt);
+        resp = [resp.data];
         break;
       case "replace":
         //console.log("all");
-        //setSearch("all");
+        resp = await replaceHospital(origid, data, session.jwt);
+        resp = [resp.data];
         break;
       case "delete":
         //console.log("all");
-        //setSearch("all");
+        resp = await deleteHospital(data, session.jwt);
+        resp = resp.data;
         break;
     }
+    console.log("data_back");
+    console.log(resp);
+    setHospitals(resp);
   };
 
   const handleSignin = (e) => {
@@ -208,10 +219,10 @@ export default function Home(props) {
                 />
               </div>
               <div>
-                <label>logitude:</label>
+                <label>longitude:</label>
                 <input
-                  name="logitude"
-                  {...register("logitude", {
+                  name="longitude"
+                  {...register("longitude", {
                     required: true,
                   })}
                 />
@@ -226,7 +237,7 @@ export default function Home(props) {
                 return (
                   <ShowHospital
                     hospital={hospital}
-                    hideValue={hasER}
+                    hideValue={false}
                     key={`ShowHospital-${hospital.provider_id}`}
                   />
                 );
