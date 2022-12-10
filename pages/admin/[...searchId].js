@@ -32,8 +32,9 @@ const routeLengthMap = {
 export default function Home(props) {
   //session
   const { data: session } = useSession();
-  const [token, setToken] = useState(session?.jwt || null);
   const [hospitals, setHospitals] = useState(null);
+  const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   //Search Type
   const searchType = props.searchId[0];
@@ -42,45 +43,51 @@ export default function Home(props) {
   //Search code, set the api method depending on the route that is chosen
   useEffect(() => {}, [searchType]);
 
-  //Fetch the api key that is needed
-  useEffect(() => {
-    if (session) {
-      setToken(session.jwt);
-    }
-  }, [session]);
-
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
     // Handle form submission here
     console.log(data);
     let resp = null;
+    setHasError(false);
+    setIsLoading(true);
 
     switch (searchType) {
       //add
       case "add":
-        //console.log("all");
         resp = await addHospital(data, session.jwt);
+        if (resp != null) {
+          resp = [resp.data];
+        }
 
         break;
       case "replace":
-        //console.log("all");
         resp = await replaceHospital(origid, data, session.jwt);
         if (resp != null) {
           resp = [resp.data];
         }
         break;
       case "delete":
-        //console.log("all");
         resp = await deleteHospital(data, session.jwt);
         if (resp != null) {
           resp = resp.data;
         }
         break;
+      default:
+        console.error("invalid route", searchType);
+        break;
     }
     console.log("data_back");
     console.log(resp);
-    setHospitals(resp);
+
+    if (resp == null) {
+      setHospitals(null);
+      setHasError(true);
+    } else {
+      setHospitals(resp);
+    }
+
+    setIsLoading(false);
   };
 
   const handleSignin = (e) => {
@@ -95,6 +102,9 @@ export default function Home(props) {
 
   return (
     <div>
+      <h1>ADMIN COMMANDS | {searchType}</h1>
+      {/* Valid links to search by, pass in current page so it is hidden from the links */}
+      <SearchLinks currentVal={searchType} />
       {session?.isAdmin !== true ? (
         <div>
           <p>Please sign in as an Admin</p>
@@ -113,6 +123,18 @@ export default function Home(props) {
         <>
           <div style={{ display: "grid", justifyContent: "center" }}>
             <form onSubmit={handleSubmit(onSubmit)}>
+              {searchType === "replace" && (
+                <div>
+                  <label>Id to Replace:</label>
+                  <input
+                    name="id"
+                    {...register("id", {
+                      required: true,
+                    })}
+                  />
+                  <br /> <br /> <br />{" "}
+                </div>
+              )}
               <div>
                 <label>provider_id:</label>
                 <input
@@ -235,6 +257,8 @@ export default function Home(props) {
             </form>
           </div>
           <div>
+            {isLoading && <LinearProgress />}
+
             {/* Map each hospital to an element */}
             {hospitals &&
               hospitals.map((hospital, index) => {
