@@ -138,18 +138,18 @@ export default function Home(props) {
               <div>
                 <label>provider_id:</label>
                 <input
-                  name="provider_id"
-                  {...register("provider_id", {
-                    required: true,
+                  name={isRequired ? "provider_id" : "id"}
+                  {...register(isRequired ? "provider_id" : "id", {
+                    required: isRequired,
                   })}
                 />
               </div>
               <div>
                 <label>hospital_name:</label>
                 <input
-                  name="hospital_name"
-                  {...register("hospital_name", {
-                    required: true,
+                  name={isRequired ? "hospital_name" : "name"}
+                  {...register(isRequired ? "hospital_name" : "name", {
+                    required: isRequired,
                   })}
                 />
               </div>
@@ -158,7 +158,7 @@ export default function Home(props) {
                 <input
                   name="address"
                   {...register("address", {
-                    required: true,
+                    required: isRequired,
                   })}
                 />
               </div>
@@ -167,7 +167,7 @@ export default function Home(props) {
                 <input
                   name="city"
                   {...register("city", {
-                    required: true,
+                    required: isRequired,
                   })}
                 />
               </div>
@@ -176,62 +176,102 @@ export default function Home(props) {
                 <input
                   name="state"
                   {...register("state", {
-                    required: true,
+                    required: isRequired,
                   })}
                 />
               </div>
               <div>
                 <label>zip_code:</label>
                 <input
-                  name="zip_code"
-                  {...register("zip_code", {
-                    required: true,
+                  name={isRequired ? "zip_code" : "zipcode"}
+                  type="number"
+                  {...register(isRequired ? "zip_code" : "zipcode", {
+                    required: isRequired,
                   })}
                 />
               </div>
               <div>
                 <label>county_name:</label>
                 <input
-                  name="county_name"
-                  {...register("county_name", {
-                    required: true,
+                  name={isRequired ? "county_name" : "county"}
+                  {...register(isRequired ? "county_name" : "county", {
+                    required: isRequired,
                   })}
                 />
               </div>
               <div>
                 <label>hospital_type:</label>
                 <input
-                  name="hospital_type"
-                  {...register("hospital_type", {
-                    required: true,
+                  name={isRequired ? "hospital_type" : "type"}
+                  {...register(isRequired ? "hospital_type" : "type", {
+                    required: isRequired,
                   })}
                 />
               </div>
               <div>
                 <label>hospital_ownership:</label>
                 <input
-                  name="hospital_ownership"
-                  {...register("hospital_ownership", {
-                    required: true,
-                  })}
+                  name={isRequired ? "hospital_ownership" : "ownership"}
+                  {...register(
+                    isRequired ? "hospital_ownership" : "ownership",
+                    {
+                      required: isRequired,
+                    }
+                  )}
                 />
               </div>
-              <div>
-                <label>emergency_services:</label>
-                <input
-                  name="emergency_services"
-                  type="checkbox"
-                  {...register("emergency_services", {
-                    required: false,
-                  })}
-                />
-              </div>
+              {searchType === "delete" ? (
+                //delete form
+                <>
+                  <label>emergency_services:</label>
+                  <label htmlFor="em-true">
+                    <input
+                      {...register("emergency_services")}
+                      type="radio"
+                      value={true}
+                      id="emfield-true"
+                    />
+                    true
+                  </label>
+                  <label htmlFor="em-false">
+                    <input
+                      {...register("emergency_services")}
+                      type="radio"
+                      value={false}
+                      id="emfield-false"
+                    />
+                    false
+                  </label>
+                  <label htmlFor="em-none">
+                    <input
+                      {...register("emergency_services")}
+                      type="radio"
+                      value=""
+                      id="emfield-false"
+                    />
+                    none
+                  </label>
+                </>
+              ) : (
+                //Normal form
+                <div>
+                  <label>emergency_services:</label>
+                  <input
+                    name="emergency_services"
+                    type="checkbox"
+                    {...register("emergency_services", {
+                      required: isRequired,
+                    })}
+                  />
+                </div>
+              )}
               <div>
                 <label>phone_number:</label>
                 <input
-                  name="phone_number"
-                  {...register("phone_number", {
-                    required: true,
+                  name={isRequired ? "phone_number" : "phone"}
+                  type="tel"
+                  {...register(isRequired ? "phone_number" : "phone", {
+                    required: isRequired,
                   })}
                 />
               </div>
@@ -239,8 +279,9 @@ export default function Home(props) {
                 <label>latitude:</label>
                 <input
                   name="latitude"
+                  type="number"
                   {...register("latitude", {
-                    required: true,
+                    required: isRequired,
                   })}
                 />
               </div>
@@ -248,11 +289,25 @@ export default function Home(props) {
                 <label>longitude:</label>
                 <input
                   name="longitude"
+                  type="number"
                   {...register("longitude", {
-                    required: true,
+                    required: isRequired,
                   })}
                 />
               </div>
+              {searchType === "delete" && (
+                <div>
+                  <label>dist from cords (mi):</label>
+                  <input
+                    name="dist"
+                    type="number"
+                    {...register("dist", {
+                      required: false,
+                    })}
+                  />
+                  <br /> <br /> <br />{" "}
+                </div>
+              )}
               <button type="submit">Submit</button>{" "}
             </form>
           </div>

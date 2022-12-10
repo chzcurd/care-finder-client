@@ -37,7 +37,26 @@ export async function replaceHospital(origId, body, jwt) {
 }
 
 export async function deleteHospital(body, jwt) {
-  let resp = await makePPD("/api/hospitals", body, "DELETE", jwt);
+  const serialize = function (obj) {
+    var str = [];
+    for (var p in obj)
+      if (obj.hasOwnProperty(p)) {
+        if (obj[p] !== "" && obj[p] != null) {
+          console.log(obj[p]);
+          str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        }
+      }
+    return str.join("&");
+  };
+
+  const query = serialize(body);
+
+  let resp = await makePPD(
+    "/api/hospitals?" + query,
+    { test: "test" },
+    "DELETE",
+    jwt
+  );
   console.log(resp);
   return resp;
 }
