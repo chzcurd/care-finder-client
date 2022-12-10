@@ -62,7 +62,7 @@ export default function Home(props) {
 
         break;
       case "replace":
-        resp = await replaceHospital(origid, data, session.jwt);
+        resp = await replaceHospital(data.id, data, session.jwt);
         if (resp != null) {
           resp = [resp.data];
         }
