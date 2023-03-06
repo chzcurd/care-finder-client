@@ -1,7 +1,7 @@
 import { XMLParser } from "fast-xml-parser";
 
 //Set the API baseURL here
-const BASE_API_URL = "http://localhost:3001";
+const BASE_API_URL = "https://carefinder-server-chzcurd.vercel.app";
 
 //fetches the base URL for the API
 export function getUrlOrigin() {
