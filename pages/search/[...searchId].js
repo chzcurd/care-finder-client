@@ -201,10 +201,10 @@ export default function Home(props) {
         <SearchLinks currentVal={searchType} />
 
         {/* Wait for the API key to be returned from the backend */}
-        {!token && <p>Please log in</p>}
+        {/*!token && <p>Please log in</p>*/}
 
         {/* Key is good, show seach options */}
-        {token && (
+        {(true || token) && (
           <div className={`${styles.aic} ${styles.tac}`}>
             <h2>Search by: {searchType}</h2>
             {/* search boxes */}
