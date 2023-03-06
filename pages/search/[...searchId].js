@@ -132,7 +132,7 @@ export default function Home(props) {
       //console.log(search);
       //console.log(searchType);
       //console.log(token);
-      if (token != null && search != null) {
+      if ((true || token != null) && search != null) {
         setIsLoading(true);
         let hospitals = await getHospitalsByRoute(searchType, search, token);
         //console.log(hospitals);
