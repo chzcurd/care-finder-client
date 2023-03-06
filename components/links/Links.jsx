@@ -90,11 +90,11 @@ export default function SearchLinks(props) {
           SIGN OUT
         </a>
       )}
-      {!session && (
+      {/*!session && (
         <a href="#" onClick={handleSignin} className="btn-signin">
           SIGN IN
         </a>
-      )}
+      )*/}
 
       {session?.isAdmin === true && (
         <>
