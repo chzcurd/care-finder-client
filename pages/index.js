@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 
 export default function Home(props) {
   const { data: session } = useSession();
-  console.log("session", session);
+  //console.log("session", session);
   return (
     <div className={styles.container}>
       <Header title="Care Finder" />

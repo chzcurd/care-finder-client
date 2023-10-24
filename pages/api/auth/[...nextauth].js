@@ -22,8 +22,8 @@ export default NextAuth({
         };
 
         const theToken = await loginUser(req);
-        console.log("back");
-        console.log(theToken);
+        //console.log("back");
+        //console.log(theToken);
 
         function parseJwt(token) {
           return JSON.parse(
@@ -66,8 +66,8 @@ export default NextAuth({
         };
 
         const theToken = await createUser(req);
-        console.log("back");
-        console.log(theToken);
+        //console.log("back");
+        //console.log(theToken);
 
         function parseJwt(token) {
           return JSON.parse(

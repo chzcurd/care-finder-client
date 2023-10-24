@@ -87,11 +87,11 @@ export async function makePPD(url, body, method, apiKey) {
     url = getUrlOrigin() + url;
   }
 
-  console.log("url");
-  console.log(url);
+  //console.log("url");
+  //console.log(url);
   //send POST request with data
   const res = await fetch(url, options);
-  console.log("options");
+  //console.log("options");
 
   //console.log(res);
 

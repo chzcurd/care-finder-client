@@ -27,7 +27,7 @@ export default class ShowHospital extends Component {
   //render the component
   render() {
     const hospital = this.props.hospital;
-    console.log(hospital);
+    //console.log(hospital);
     //console.log(props)
 
     //console.log("render")

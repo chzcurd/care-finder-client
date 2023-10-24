@@ -8,31 +8,31 @@ import { makeGET, makePPD, proxyGET, proxyReq } from "./httpHelpers";
 // Gets an API key from the backend and makes sure it is valid
 
 export async function loginUser(loginBody) {
-  console.log("loginBody");
-  console.log(loginBody);
+  //console.log("loginBody");
+  //console.log(loginBody);
   let resp = await makePPD("/api/auth/login", loginBody, "POST", "");
-  console.log(resp);
+  //console.log(resp);
   return resp;
 }
 
 export async function createUser(loginBody) {
-  console.log("loginBody");
-  console.log(loginBody);
-  console.log("NEW USER");
+  //console.log("loginBody");
+  //console.log(loginBody);
+  //console.log("NEW USER");
   let resp = await makePPD("/api/auth/signup", loginBody, "POST", "");
-  console.log(resp);
+  //console.log(resp);
   return resp;
 }
 
 export async function addHospital(body, jwt) {
   let resp = await makePPD("/api/hospitals", body, "POST", jwt);
-  console.log(resp);
+  //console.log(resp);
   return resp;
 }
 
 export async function replaceHospital(origId, body, jwt) {
   let resp = await makePPD(`/api/hospitals?id=${origId}`, body, "PUT", jwt);
-  console.log(resp);
+  //console.log(resp);
   return resp;
 }
 
@@ -42,7 +42,7 @@ export async function deleteHospital(body, jwt) {
     for (var p in obj)
       if (obj.hasOwnProperty(p)) {
         if (obj[p] !== "" && obj[p] != null) {
-          console.log(obj[p]);
+          //console.log(obj[p]);
           str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
         }
       }
@@ -57,7 +57,7 @@ export async function deleteHospital(body, jwt) {
     "DELETE",
     jwt
   );
-  console.log(resp);
+  //console.log(resp);
   return resp;
 }
 
@@ -67,7 +67,7 @@ export async function getAllHospitals(key) {
   if (resp == null) {
     return null;
   } else {
-    console.log(resp);
+    //console.log(resp);
     const itemArray = resp.data;
     return itemArray;
   }
@@ -87,7 +87,7 @@ export async function getHospitalById(id, key) {
 //Route to search by city
 export async function getHospitalByCity(city, key) {
   let resp = await makeGET("/api/hospitals?city=" + city, key);
-  console.log(resp);
+  //console.log(resp);
   if (resp == null) {
     return null;
   } else {

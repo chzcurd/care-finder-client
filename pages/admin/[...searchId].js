@@ -47,7 +47,7 @@ export default function Home(props) {
 
   const onSubmit = async (data) => {
     // Handle form submission here
-    console.log(data);
+    //console.log(data);
     let resp = null;
     setHasError(false);
     setIsLoading(true);
@@ -77,8 +77,8 @@ export default function Home(props) {
         console.error("invalid route", searchType);
         break;
     }
-    console.log("data_back");
-    console.log(resp);
+    //console.log("data_back");
+    //console.log(resp);
 
     if (resp == null) {
       setHospitals(null);
