@@ -181,14 +181,12 @@ export default function Home(props) {
           }}
         >
           <Link href={"/"} as={`/`}>
-            <a>
-              <Image
-                alt="Care Finder Logo"
-                src={"/medLogo.png"}
-                layout="fill"
-                objectFit="contain"
-              ></Image>
-            </a>
+            <Image
+              alt="Care Finder Logo"
+              src={"/medLogo.png"}
+              layout="fill"
+              objectFit="contain"
+            ></Image>
           </Link>
         </div>
         <h1 className={styles.title}>
